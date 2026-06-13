@@ -1,6 +1,6 @@
 # Signal Peptide Efficiency Prediction
 
-We predict signal-peptide secretion efficiency (whole-cell activity, **WA**, on a 1–10 scale)
+We predict signal-peptide secretion efficiency (weighted average, **WA**, of the activity-bin distribution, on a 1–10 scale)
 in *Bacillus subtilis* from the [Grasso et al. 2023](https://doi.org/10.1021/acssynbio.2c00328)
 library, comparing random forests and neural networks across physicochemical descriptors and
 several protein-language-model (PLM) embeddings. Predicting the full 10-bin probability
