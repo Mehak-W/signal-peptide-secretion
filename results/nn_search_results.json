@@ -1,0 +1,2681 @@
+{
+  "PhysChem": {
+    "feature_type": "PhysChem",
+    "n_features": 156,
+    "best_config": {
+      "hidden_layers": [
+        256,
+        128
+      ],
+      "dropout": 0.3,
+      "l2_reg": 0.01,
+      "learning_rate": 0.001,
+      "batch_size": 64,
+      "log_transform": false
+    },
+    "best_val_mse": 1.3904722593256842,
+    "train_metrics": {
+      "mse": 0.17080952697007243,
+      "rmse": 0.4132910922946107,
+      "mae": 0.3134009530270779,
+      "r2": 0.9617530707179796,
+      "spearman_rho": 0.9824407654676436,
+      "spearman_p": 0.0,
+      "pearson_r": 0.9842234503966469,
+      "pearson_p": 0.0,
+      "n_samples": 2468
+    },
+    "test_metrics": {
+      "mse": 1.327851586490737,
+      "rmse": 1.1523244276204236,
+      "mae": 0.8456907416930084,
+      "r2": 0.7214491096635964,
+      "spearman_rho": 0.8397850479719869,
+      "spearman_p": 0.0,
+      "pearson_r": 0.8532923363811711,
+      "pearson_p": 0.0,
+      "n_samples": 1323
+    },
+    "n_configs": 40,
+    "val_fraction": 0.2,
+    "all_trials": [
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.6594114836623286,
+        "test_mse": 1.7069778404800848,
+        "train_time_seconds": 40.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.778571958207039,
+        "test_mse": 1.7797153176863578,
+        "train_time_seconds": 40.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.9945479335648233,
+        "test_mse": 1.9324066361573424,
+        "train_time_seconds": 94.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.7530885760352344,
+        "test_mse": 1.4709616568393045,
+        "train_time_seconds": 70.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 2.213200178245962,
+        "test_mse": 2.263350127470318,
+        "train_time_seconds": 93.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.8398893731550294,
+        "test_mse": 1.6294817030351247,
+        "train_time_seconds": 85.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.7120185320567871,
+        "test_mse": 1.2955687900259714,
+        "train_time_seconds": 80.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.7961825025477975,
+        "test_mse": 1.6912159453602875,
+        "train_time_seconds": 122.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.5072918270628193,
+        "test_mse": 1.3117494141538393,
+        "train_time_seconds": 137.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.6971721560009916,
+        "test_mse": 1.4980901765850365,
+        "train_time_seconds": 61.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.85851779594884,
+        "test_mse": 1.629943817057632,
+        "train_time_seconds": 139.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.7530339438682128,
+        "test_mse": 1.6422194831960206,
+        "train_time_seconds": 97.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.9927539687630162,
+        "test_mse": 1.5239183875856634,
+        "train_time_seconds": 94.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.7115947610000857,
+        "test_mse": 1.4016429361575768,
+        "train_time_seconds": 127.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.51544875226175,
+        "test_mse": 1.3025614238738061,
+        "train_time_seconds": 40.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.5285851058602462,
+        "test_mse": 1.2976506103066987,
+        "train_time_seconds": 86.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.7556757257187325,
+        "test_mse": 2.2138792830145726,
+        "train_time_seconds": 76.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.9402449128152015,
+        "test_mse": 1.6663935893570583,
+        "train_time_seconds": 97.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 3.7166678848333463,
+        "test_mse": 3.2160602515537917,
+        "train_time_seconds": 87.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.6840753410776004,
+        "test_mse": 1.3557669106468924,
+        "train_time_seconds": 97.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5513857794707608,
+        "test_mse": 1.347269861134684,
+        "train_time_seconds": 76.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.7854423432150037,
+        "test_mse": 1.6934436531944377,
+        "train_time_seconds": 49.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.805005665284128,
+        "test_mse": 1.909381316293837,
+        "train_time_seconds": 77.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4245059123346158,
+        "test_mse": 1.523473578190067,
+        "train_time_seconds": 85.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.8647570262011972,
+        "test_mse": 1.4861028939031857,
+        "train_time_seconds": 94.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.5724794899715109,
+        "test_mse": 1.5691142814424888,
+        "train_time_seconds": 141.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 15.712050158329607,
+        "test_mse": 14.478745186417429,
+        "train_time_seconds": 8.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.785288053467455,
+        "test_mse": 1.8994500585481213,
+        "train_time_seconds": 129.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.612275619663142,
+        "test_mse": 1.4437436131574546,
+        "train_time_seconds": 41.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.3904722593256842,
+        "test_mse": 1.327851586490737,
+        "train_time_seconds": 94.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 2.229146299493276,
+        "test_mse": 2.2217191722578624,
+        "train_time_seconds": 139.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 2.073624011284519,
+        "test_mse": 2.3673520099641845,
+        "train_time_seconds": 14.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.6197438614972244,
+        "test_mse": 1.461908328591455,
+        "train_time_seconds": 113.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.906642716671271,
+        "test_mse": 1.4752816387200807,
+        "train_time_seconds": 138.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.7620583700537678,
+        "test_mse": 1.482996699750746,
+        "train_time_seconds": 131.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.8401618527197539,
+        "test_mse": 2.495378421261452,
+        "train_time_seconds": 77.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 2.534533181591824,
+        "test_mse": 3.2828027406361726,
+        "train_time_seconds": 117.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5497288505682751,
+        "test_mse": 1.31596047917829,
+        "train_time_seconds": 87.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.706522221200311,
+        "test_mse": 1.6923646912675847,
+        "train_time_seconds": 119.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            128,
+            64
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.6590977282877157,
+        "test_mse": 1.3838268984176154,
+        "train_time_seconds": 62.8
+      }
+    ]
+  },
+  "ESM2-650M": {
+    "feature_type": "ESM2-650M",
+    "n_features": 1280,
+    "best_config": {
+      "hidden_layers": [
+        256,
+        128
+      ],
+      "dropout": 0.4,
+      "l2_reg": 0.01,
+      "learning_rate": 0.001,
+      "batch_size": 64,
+      "log_transform": false
+    },
+    "best_val_mse": 1.240521841967617,
+    "train_metrics": {
+      "mse": 0.39081371028289036,
+      "rmse": 0.6251509499975909,
+      "mae": 0.46734225209323443,
+      "r2": 0.9128692209112591,
+      "spearman_rho": 0.9529320987719897,
+      "spearman_p": 0.0,
+      "pearson_r": 0.958307945598611,
+      "pearson_p": 0.0,
+      "n_samples": 2476
+    },
+    "test_metrics": {
+      "mse": 1.090174273599566,
+      "rmse": 1.0441141094725068,
+      "mae": 0.7677648939606943,
+      "r2": 0.7710734774848903,
+      "spearman_rho": 0.8613490654283404,
+      "spearman_p": 0.0,
+      "pearson_r": 0.878526942396475,
+      "pearson_p": 0.0,
+      "n_samples": 1326
+    },
+    "n_configs": 40,
+    "val_fraction": 0.2,
+    "all_trials": [
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4151476353026498,
+        "test_mse": 1.058241294512199,
+        "train_time_seconds": 226.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.5105475104791468,
+        "test_mse": 1.3449316600822818,
+        "train_time_seconds": 204.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.330686085469418,
+        "test_mse": 1.125942362983538,
+        "train_time_seconds": 53.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.2815772533808385,
+        "test_mse": 1.136397156471432,
+        "train_time_seconds": 184.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4058091338265197,
+        "test_mse": 1.3348088993723168,
+        "train_time_seconds": 126.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.308643854192898,
+        "test_mse": 1.2252749642738316,
+        "train_time_seconds": 210.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4393221713424609,
+        "test_mse": 1.198040352087558,
+        "train_time_seconds": 45.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.240521841967617,
+        "test_mse": 1.090174273599566,
+        "train_time_seconds": 114.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.4685961583211258,
+        "test_mse": 1.160054208536403,
+        "train_time_seconds": 186.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.5049269801827176,
+        "test_mse": 1.362457743168459,
+        "train_time_seconds": 293.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.739531595066732,
+        "test_mse": 1.4150762917321897,
+        "train_time_seconds": 257.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.3750788055062284,
+        "test_mse": 1.2156971830568195,
+        "train_time_seconds": 295.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5132727084882363,
+        "test_mse": 1.141092390238425,
+        "train_time_seconds": 51.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4525295231330104,
+        "test_mse": 1.1467931902978696,
+        "train_time_seconds": 230.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.510572911940789,
+        "test_mse": 1.2180372346917878,
+        "train_time_seconds": 75.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.380254126132625,
+        "test_mse": 1.1605611236834457,
+        "train_time_seconds": 235.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.5660107879889358,
+        "test_mse": 1.2737497208762378,
+        "train_time_seconds": 52.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 2.1720206178020405,
+        "test_mse": 1.6612286553198106,
+        "train_time_seconds": 134.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.3981051169299399,
+        "test_mse": 1.147648640159772,
+        "train_time_seconds": 115.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.3508034829441935,
+        "test_mse": 1.2388254812321182,
+        "train_time_seconds": 147.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 2.254161510811669,
+        "test_mse": 1.8107075263104282,
+        "train_time_seconds": 147.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.420483277632509,
+        "test_mse": 1.2207685850863421,
+        "train_time_seconds": 297.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4185245174467238,
+        "test_mse": 1.1297778618772474,
+        "train_time_seconds": 226.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.9320558050133245,
+        "test_mse": 1.541319142911751,
+        "train_time_seconds": 143.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.6235066450728868,
+        "test_mse": 1.237456771186982,
+        "train_time_seconds": 178.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.7757617912708683,
+        "test_mse": 1.450977894401849,
+        "train_time_seconds": 209.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.2663375020041296,
+        "test_mse": 1.1196545946389496,
+        "train_time_seconds": 70.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.3002360682653016,
+        "test_mse": 1.1095170452585208,
+        "train_time_seconds": 182.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.662073431998578,
+        "test_mse": 1.1955094330054712,
+        "train_time_seconds": 83.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 2.6885932728154933,
+        "test_mse": 1.7662327414900418,
+        "train_time_seconds": 134.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.730789769044822,
+        "test_mse": 1.1409386865635047,
+        "train_time_seconds": 239.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4685797807528456,
+        "test_mse": 1.1723298176373749,
+        "train_time_seconds": 189.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5346556021742237,
+        "test_mse": 1.1617785850160274,
+        "train_time_seconds": 97.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.3639742687151093,
+        "test_mse": 1.206211177908839,
+        "train_time_seconds": 96.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.3533577533135424,
+        "test_mse": 1.1138964413143468,
+        "train_time_seconds": 227.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 2.4219653615011025,
+        "test_mse": 2.297154674926984,
+        "train_time_seconds": 133.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.4090757584088598,
+        "test_mse": 1.2749782789293016,
+        "train_time_seconds": 163.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.6818901323678885,
+        "test_mse": 1.3390713996323311,
+        "train_time_seconds": 199.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4257519806015622,
+        "test_mse": 1.177493386911379,
+        "train_time_seconds": 112.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.526727006375217,
+        "test_mse": 1.295379742146664,
+        "train_time_seconds": 79.5
+      }
+    ]
+  },
+  "ESM2-3B": {
+    "feature_type": "ESM2-3B",
+    "n_features": 2560,
+    "best_config": {
+      "hidden_layers": [
+        1024,
+        512
+      ],
+      "dropout": 0.4,
+      "l2_reg": 0.01,
+      "learning_rate": 0.001,
+      "batch_size": 64,
+      "log_transform": false
+    },
+    "best_val_mse": 1.3015503471027583,
+    "train_metrics": {
+      "mse": 0.23539703897831835,
+      "rmse": 0.48517732735394625,
+      "mae": 0.3550863690438733,
+      "r2": 0.9469555588382479,
+      "spearman_rho": 0.9707770808646583,
+      "spearman_p": 0.0,
+      "pearson_r": 0.9743912916225043,
+      "pearson_p": 0.0,
+      "n_samples": 2476
+    },
+    "test_metrics": {
+      "mse": 1.0669291395064662,
+      "rmse": 1.032922620289858,
+      "mae": 0.7549533712403073,
+      "r2": 0.7759547408225036,
+      "spearman_rho": 0.8607601080540834,
+      "spearman_p": 0.0,
+      "pearson_r": 0.8815337812012405,
+      "pearson_p": 0.0,
+      "n_samples": 1326
+    },
+    "n_configs": 40,
+    "val_fraction": 0.2,
+    "all_trials": [
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.434577210802926,
+        "test_mse": 1.169277190029372,
+        "train_time_seconds": 452.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4987960988769018,
+        "test_mse": 1.1818961755575916,
+        "train_time_seconds": 220.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.5371505919901662,
+        "test_mse": 1.2734902952397824,
+        "train_time_seconds": 242.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.5144727486903447,
+        "test_mse": 1.199724224185313,
+        "train_time_seconds": 417.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4931570665850693,
+        "test_mse": 1.2080356996758608,
+        "train_time_seconds": 227.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 2.2626842429392298,
+        "test_mse": 2.416960947569616,
+        "train_time_seconds": 281.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.411973382809601,
+        "test_mse": 1.2071185619361315,
+        "train_time_seconds": 466.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4473205143844028,
+        "test_mse": 1.2257320483113956,
+        "train_time_seconds": 257.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.6496438732503456,
+        "test_mse": 1.4168229634941707,
+        "train_time_seconds": 175.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.4046416838067777,
+        "test_mse": 1.1381245097626569,
+        "train_time_seconds": 319.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5819947642797774,
+        "test_mse": 1.1370044495269775,
+        "train_time_seconds": 253.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.3334387101956018,
+        "test_mse": 1.1443676335051518,
+        "train_time_seconds": 487.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4648238026829938,
+        "test_mse": 1.2152837921211466,
+        "train_time_seconds": 198.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4095700905210278,
+        "test_mse": 1.3479963295750648,
+        "train_time_seconds": 426.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5241307590319506,
+        "test_mse": 1.325816367722283,
+        "train_time_seconds": 296.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.5487420115468469,
+        "test_mse": 1.1681119215360862,
+        "train_time_seconds": 311.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.35014185056469,
+        "test_mse": 1.1946061734581293,
+        "train_time_seconds": 481.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.424506386667658,
+        "test_mse": 1.265743459064422,
+        "train_time_seconds": 93.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.414387553744156,
+        "test_mse": 1.1047381466482418,
+        "train_time_seconds": 352.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5525023533655444,
+        "test_mse": 1.20555384482751,
+        "train_time_seconds": 404.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5089516534276834,
+        "test_mse": 1.2464036605061015,
+        "train_time_seconds": 114.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.376646628173459,
+        "test_mse": 1.2458592065109018,
+        "train_time_seconds": 247.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.4422462075574836,
+        "test_mse": 1.302736517841666,
+        "train_time_seconds": 247.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.6241146200895182,
+        "test_mse": 1.448507456308167,
+        "train_time_seconds": 728.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.6642463543823465,
+        "test_mse": 1.3151585918102628,
+        "train_time_seconds": 81.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.5867517532655628,
+        "test_mse": 1.2978140638024518,
+        "train_time_seconds": 235.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4903290108130507,
+        "test_mse": 1.3268788424124442,
+        "train_time_seconds": 157.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.823081304017642,
+        "test_mse": 1.5776759440710595,
+        "train_time_seconds": 737.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.5920190058012733,
+        "test_mse": 1.244220909054091,
+        "train_time_seconds": 417.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.3868444104701951,
+        "test_mse": 1.2036857702159072,
+        "train_time_seconds": 420.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.5988962229446473,
+        "test_mse": 1.196201734808336,
+        "train_time_seconds": 364.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4295564781879446,
+        "test_mse": 1.2550588350274168,
+        "train_time_seconds": 422.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.445400270763464,
+        "test_mse": 1.1112584820905573,
+        "train_time_seconds": 416.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.7585070159796452,
+        "test_mse": 1.4992912957994988,
+        "train_time_seconds": 267.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.3162175905541484,
+        "test_mse": 1.1198631794165392,
+        "train_time_seconds": 418.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.3015503471027583,
+        "test_mse": 1.0669291395064662,
+        "train_time_seconds": 422.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4899043808542587,
+        "test_mse": 1.1880073801612692,
+        "train_time_seconds": 163.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4703148266840722,
+        "test_mse": 1.1180970351522406,
+        "train_time_seconds": 491.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.7506182005423683,
+        "test_mse": 1.4919531103906891,
+        "train_time_seconds": 408.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            1024,
+            512
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.530914019051452,
+        "test_mse": 1.1999166201723295,
+        "train_time_seconds": 701.6
+      }
+    ]
+  },
+  "Ginkgo-AA0": {
+    "feature_type": "Ginkgo-AA0",
+    "n_features": 1280,
+    "best_config": {
+      "hidden_layers": [
+        256,
+        128
+      ],
+      "dropout": 0.3,
+      "l2_reg": 0.0001,
+      "learning_rate": 0.0005,
+      "batch_size": 32,
+      "log_transform": false
+    },
+    "best_val_mse": 1.146183874992277,
+    "train_metrics": {
+      "mse": 0.44563651343705646,
+      "rmse": 0.6675601197173603,
+      "mae": 0.5039512897182359,
+      "r2": 0.89964151861106,
+      "spearman_rho": 0.9447033098810201,
+      "spearman_p": 0.0,
+      "pearson_r": 0.9499877999460234,
+      "pearson_p": 0.0,
+      "n_samples": 2476
+    },
+    "test_metrics": {
+      "mse": 1.04969071572792,
+      "rmse": 1.0245441502092139,
+      "mae": 0.7563287550382867,
+      "r2": 0.7795746505055988,
+      "spearman_rho": 0.8663664985546622,
+      "spearman_p": 0.0,
+      "pearson_r": 0.8843604709274956,
+      "pearson_p": 0.0,
+      "n_samples": 1326
+    },
+    "n_configs": 40,
+    "val_fraction": 0.2,
+    "all_trials": [
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.3192535477575595,
+        "test_mse": 1.076040023001487,
+        "train_time_seconds": 183.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4275853323597192,
+        "test_mse": 1.1454356028478492,
+        "train_time_seconds": 157.6
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5657264115991698,
+        "test_mse": 1.3531871718532587,
+        "train_time_seconds": 70.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.3290003727128423,
+        "test_mse": 1.148725812822101,
+        "train_time_seconds": 124.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.483943678714399,
+        "test_mse": 1.2510069308912608,
+        "train_time_seconds": 64.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.2791492594351521,
+        "test_mse": 1.0452354897882281,
+        "train_time_seconds": 135.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.2900360217382076,
+        "test_mse": 1.0441393742624772,
+        "train_time_seconds": 128.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 11.7141119621671,
+        "test_mse": 17.19342115007474,
+        "train_time_seconds": 12.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.5833138812916236,
+        "test_mse": 1.410344644438935,
+        "train_time_seconds": 158.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.146183874992277,
+        "test_mse": 1.04969071572792,
+        "train_time_seconds": 116.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.316738553579392,
+        "test_mse": 1.1509451868326042,
+        "train_time_seconds": 108.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5267672222488708,
+        "test_mse": 1.0787498717381314,
+        "train_time_seconds": 91.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.417322713227853,
+        "test_mse": 1.066341071708602,
+        "train_time_seconds": 191.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.236090222454528,
+        "test_mse": 1.00402342703185,
+        "train_time_seconds": 90.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4748630589570209,
+        "test_mse": 1.1837080989240856,
+        "train_time_seconds": 299.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.1974916802787463,
+        "test_mse": 0.9686768484404897,
+        "train_time_seconds": 188.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4787160106313129,
+        "test_mse": 1.0469477300637717,
+        "train_time_seconds": 90.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.528222268083343,
+        "test_mse": 1.1587880367911136,
+        "train_time_seconds": 93.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.3116816536496039,
+        "test_mse": 1.0140677926188773,
+        "train_time_seconds": 277.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.364523575949245,
+        "test_mse": 1.066579245611856,
+        "train_time_seconds": 111.8
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.223889490391352,
+        "test_mse": 1.174017035939255,
+        "train_time_seconds": 100.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.247919259130356,
+        "test_mse": 1.0379157796202791,
+        "train_time_seconds": 230.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.3655534668057319,
+        "test_mse": 1.1857232315351929,
+        "train_time_seconds": 71.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.2722902979840962,
+        "test_mse": 1.0855835569010481,
+        "train_time_seconds": 209.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4898899322300228,
+        "test_mse": 1.0436217082422152,
+        "train_time_seconds": 123.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.5812532921254554,
+        "test_mse": 1.1576445493434473,
+        "train_time_seconds": 123.2
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4731931749527054,
+        "test_mse": 1.020077246302296,
+        "train_time_seconds": 212.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.5009808898625954,
+        "test_mse": 1.1535029660508962,
+        "train_time_seconds": 82.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.2814165290127773,
+        "test_mse": 1.036468389187364,
+        "train_time_seconds": 223.7
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.2,
+          "l2_reg": 0.01,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.7901801507988417,
+        "test_mse": 1.4747912981885494,
+        "train_time_seconds": 134.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.5454028894034775,
+        "test_mse": 1.2945778932410963,
+        "train_time_seconds": 185.0
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": false
+        },
+        "val_mse": 1.4971776905335206,
+        "test_mse": 1.0449629333090868,
+        "train_time_seconds": 261.3
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4160624985881807,
+        "test_mse": 1.11636368934021,
+        "train_time_seconds": 185.1
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256,
+            128
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.4835002502687686,
+        "test_mse": 1.14281633364626,
+        "train_time_seconds": 143.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.4,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.4659096548329433,
+        "test_mse": 1.1135672239614742,
+        "train_time_seconds": 298.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.01,
+          "learning_rate": 0.001,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.2984197353878655,
+        "test_mse": 1.0211266722627546,
+        "train_time_seconds": 155.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            512,
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.7749888302198165,
+        "test_mse": 1.444953509270866,
+        "train_time_seconds": 151.5
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.3,
+          "l2_reg": 0.001,
+          "learning_rate": 0.001,
+          "batch_size": 32,
+          "log_transform": true
+        },
+        "val_mse": 1.280647362648682,
+        "test_mse": 1.1168617649815709,
+        "train_time_seconds": 168.4
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.001,
+          "learning_rate": 0.0001,
+          "batch_size": 64,
+          "log_transform": true
+        },
+        "val_mse": 1.6575805923639098,
+        "test_mse": 1.2872916560941425,
+        "train_time_seconds": 135.9
+      },
+      {
+        "config": {
+          "hidden_layers": [
+            256
+          ],
+          "dropout": 0.5,
+          "l2_reg": 0.0001,
+          "learning_rate": 0.0005,
+          "batch_size": 64,
+          "log_transform": false
+        },
+        "val_mse": 1.3614462725141634,
+        "test_mse": 1.0494821723422851,
+        "train_time_seconds": 66.9
+      }
+    ]
+  }
+}

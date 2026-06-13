@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files are tracked in git (see README for sources)
+
+# Jupyter
+.ipynb_checkpoints/
+
+# LaTeX build artifacts
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/draft.pdf
+
+# AI-process scratch (kept locally, not shared)
+docs/plan.md
+docs/prompt_examples.md
+
+# Internal working files (kept local, not shared)
+docs/schrier_checklist.md
+scripts/experiments/
+results/_repro_distribution.json
+results/close_gap.json
+results/close_gap3.json
+results/improve.json
+results/schrier_repro_ensemble.json

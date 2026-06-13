@@ -1,0 +1,21 @@
+{
+  "description": "Bimodal bin distribution examples where WA falls between peaks",
+  "selection_criterion": "Largest peak separation, then highest combined peak probability",
+  "min_peak_probability": 0.15,
+  "min_separation": 2,
+  "examples": [
+    {
+      "idx": 8123,
+      "gene": "aspB",
+      "sp_aa": "MKLAKRVSALTPSTTLAITQKAKEL",
+      "wa": 5.63265675512341,
+      "wa_prob": 0.06626790822473,
+      "peak1_bin": 7,
+      "peak1_prob": 0.219763438443054,
+      "peak2_bin": 3,
+      "peak2_prob": 0.14593770016756,
+      "separation": 4,
+      "n_substantial": 9
+    }
+  ]
+}

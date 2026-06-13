@@ -1,0 +1,46 @@
+{
+  "script": "01_grasso_reproduction",
+  "description": "Exact Grasso RF reproduction from xlsx",
+  "rf_params": {
+    "n_estimators": 75,
+    "max_depth": 25,
+    "min_samples_split": 0.001,
+    "min_samples_leaf": 0.0001,
+    "max_features": 156,
+    "random_state": 42
+  },
+  "preprocessing": {
+    "scaler": "StandardScaler",
+    "log_transform": false,
+    "skewness": 0.1161186593950919
+  },
+  "data": {
+    "n_features": 156,
+    "n_train": 3085,
+    "n_test": 1323
+  },
+  "train_metrics": {
+    "mse": 0.30338994244263295,
+    "rmse": 0.5508084444184139,
+    "mae": 0.4155209145847963,
+    "r2": 0.9317323832772579,
+    "spearman_rho": 0.9693458302887638,
+    "spearman_p": 0.0,
+    "pearson_r": 0.9729766507463761,
+    "pearson_p": 0.0,
+    "n_samples": 3085
+  },
+  "test_metrics": {
+    "mse": 1.193322272000677,
+    "rmse": 1.0923929109989121,
+    "mae": 0.809272681709478,
+    "r2": 0.7496700800708294,
+    "spearman_rho": 0.859200633891687,
+    "spearman_p": 0.0,
+    "pearson_r": 0.8684647760322479,
+    "pearson_p": 0.0,
+    "n_samples": 1323
+  },
+  "grasso_baseline_mse": 1.22,
+  "pct_difference": -2.19
+}

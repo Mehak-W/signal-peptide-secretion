@@ -1,0 +1,24 @@
+{
+  "hidden_layers": [
+    256,
+    256,
+    128
+  ],
+  "dropout": 0.35,
+  "learning_rate": 0.0005,
+  "loss": "focal",
+  "epochs": 300,
+  "batch_size": 32,
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    1024
+  ],
+  "embedding_model": "ginkgo-AA0-650M",
+  "embedding_dim": 1280,
+  "n_train": 3068,
+  "n_test": 1326,
+  "ensemble_mse": 0.9752337931464663
+}

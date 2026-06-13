@@ -1,0 +1,266 @@
+{
+  "ESM2-650M_categorical_crossentropy": {
+    "embedding": "ESM2-650M",
+    "loss": "categorical_crossentropy",
+    "n_features": 1280,
+    "n_train": 3068,
+    "n_test": 1273,
+    "test_metrics": {
+      "mse": 1.053542883702244,
+      "rmse": 1.026422371006324,
+      "mae": 0.7482646594718032,
+      "r2": 0.7789547356680433,
+      "spearman_rho": 0.8605067378474522,
+      "spearman_p": 0.0,
+      "pearson_r": 0.8828629026824872,
+      "pearson_p": 0.0,
+      "n_samples": 1273
+    },
+    "seed_mses": [
+      1.083503495275263,
+      1.150669235599873,
+      1.0934010839398485,
+      1.1942332923520893,
+      1.1324601910517045
+    ],
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1024
+    ],
+    "elapsed_seconds": 174.0,
+    "architecture": {
+      "hidden_layers": [
+        256,
+        256
+      ],
+      "dropout": 0.2,
+      "learning_rate": 0.0005,
+      "batch_size": 32,
+      "activation": "LeakyReLU",
+      "output": "softmax(10)"
+    }
+  },
+  "ESM2-650M_focal": {
+    "embedding": "ESM2-650M",
+    "loss": "focal",
+    "n_features": 1280,
+    "n_train": 3068,
+    "n_test": 1273,
+    "test_metrics": {
+      "mse": 1.0489520037446698,
+      "rmse": 1.0241835791227418,
+      "mae": 0.7502504837479991,
+      "r2": 0.7799179544315474,
+      "spearman_rho": 0.8594575410230094,
+      "spearman_p": 0.0,
+      "pearson_r": 0.883233200126866,
+      "pearson_p": 0.0,
+      "n_samples": 1273
+    },
+    "seed_mses": [
+      1.0843257665148993,
+      1.157553437932896,
+      1.1001154358190361,
+      1.1691920822634236,
+      1.1246674537254946
+    ],
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1024
+    ],
+    "elapsed_seconds": 203.7,
+    "architecture": {
+      "hidden_layers": [
+        256,
+        256
+      ],
+      "dropout": 0.2,
+      "learning_rate": 0.0005,
+      "batch_size": 32,
+      "activation": "LeakyReLU",
+      "output": "softmax(10)"
+    }
+  },
+  "ESM2-3B_categorical_crossentropy": {
+    "embedding": "ESM2-3B",
+    "loss": "categorical_crossentropy",
+    "n_features": 2560,
+    "n_train": 3068,
+    "n_test": 1273,
+    "test_metrics": {
+      "mse": 1.1087696012143544,
+      "rmse": 1.0529812919583872,
+      "mae": 0.7749004259791151,
+      "r2": 0.7673675430065048,
+      "spearman_rho": 0.8571700955645207,
+      "spearman_p": 0.0,
+      "pearson_r": 0.8763668036117562,
+      "pearson_p": 0.0,
+      "n_samples": 1273
+    },
+    "seed_mses": [
+      1.2354120182687187,
+      1.224413459172487,
+      1.17883656605227,
+      1.1963342719962782,
+      1.2142253277599357
+    ],
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1024
+    ],
+    "elapsed_seconds": 205.6,
+    "architecture": {
+      "hidden_layers": [
+        256,
+        256
+      ],
+      "dropout": 0.2,
+      "learning_rate": 0.0005,
+      "batch_size": 32,
+      "activation": "LeakyReLU",
+      "output": "softmax(10)"
+    }
+  },
+  "ESM2-3B_focal": {
+    "embedding": "ESM2-3B",
+    "loss": "focal",
+    "n_features": 2560,
+    "n_train": 3068,
+    "n_test": 1273,
+    "test_metrics": {
+      "mse": 1.1170656137949908,
+      "rmse": 1.0569132479986192,
+      "mae": 0.779975816518749,
+      "r2": 0.7656269453315968,
+      "spearman_rho": 0.8563823079484386,
+      "spearman_p": 0.0,
+      "pearson_r": 0.8751769019512999,
+      "pearson_p": 0.0,
+      "n_samples": 1273
+    },
+    "seed_mses": [
+      1.2153335124346198,
+      1.2200482201943441,
+      1.1846644674844795,
+      1.22626341623504,
+      1.192804548178349
+    ],
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1024
+    ],
+    "elapsed_seconds": 218.1,
+    "architecture": {
+      "hidden_layers": [
+        256,
+        256
+      ],
+      "dropout": 0.2,
+      "learning_rate": 0.0005,
+      "batch_size": 32,
+      "activation": "LeakyReLU",
+      "output": "softmax(10)"
+    }
+  },
+  "Ginkgo-AA0_categorical_crossentropy": {
+    "embedding": "Ginkgo-AA0",
+    "loss": "categorical_crossentropy",
+    "n_features": 1280,
+    "n_train": 3068,
+    "n_test": 1273,
+    "test_metrics": {
+      "mse": 1.0032708812267668,
+      "rmse": 1.001634105463051,
+      "mae": 0.7308556000538142,
+      "r2": 0.7895023728336409,
+      "spearman_rho": 0.8665525449147977,
+      "spearman_p": 0.0,
+      "pearson_r": 0.888813297234095,
+      "pearson_p": 0.0,
+      "n_samples": 1273
+    },
+    "seed_mses": [
+      1.0527934732569026,
+      1.1017299700797079,
+      1.0537622041960646,
+      1.1108698030695956,
+      1.050284571707214
+    ],
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1024
+    ],
+    "elapsed_seconds": 163.6,
+    "architecture": {
+      "hidden_layers": [
+        256,
+        256
+      ],
+      "dropout": 0.2,
+      "learning_rate": 0.0005,
+      "batch_size": 32,
+      "activation": "LeakyReLU",
+      "output": "softmax(10)"
+    }
+  },
+  "Ginkgo-AA0_focal": {
+    "embedding": "Ginkgo-AA0",
+    "loss": "focal",
+    "n_features": 1280,
+    "n_train": 3068,
+    "n_test": 1273,
+    "test_metrics": {
+      "mse": 1.0007041270914245,
+      "rmse": 1.0003520015931515,
+      "mae": 0.7306133985840891,
+      "r2": 0.7900409070073312,
+      "spearman_rho": 0.8669075842132313,
+      "spearman_p": 0.0,
+      "pearson_r": 0.8889675686831686,
+      "pearson_p": 0.0,
+      "n_samples": 1273
+    },
+    "seed_mses": [
+      1.0255544250973594,
+      1.1196317342418463,
+      1.0225921862446898,
+      1.1284507164954232,
+      1.0459244771913736
+    ],
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1024
+    ],
+    "elapsed_seconds": 202.5,
+    "architecture": {
+      "hidden_layers": [
+        256,
+        256
+      ],
+      "dropout": 0.2,
+      "learning_rate": 0.0005,
+      "batch_size": 32,
+      "activation": "LeakyReLU",
+      "output": "softmax(10)"
+    }
+  }
+}

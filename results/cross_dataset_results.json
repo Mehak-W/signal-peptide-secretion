@@ -1,0 +1,117 @@
+{
+  "grasso_sanity_check": {
+    "rf_test_mse": 1.1893641510366655,
+    "nn_test_mse": 0.9716396764366834,
+    "nn_seeds": [
+      42,
+      123,
+      456,
+      789,
+      1024
+    ],
+    "nn_n_seeds": 5
+  },
+  "external_datasets": {
+    "Wu": {
+      "description": "81 SPs, binary WA (functional/non-functional)",
+      "is_binary": true,
+      "n_samples": 81,
+      "wa_range": [
+        0.0,
+        1.0
+      ],
+      "rf_metrics": {
+        "spearman_rho": -0.3136701767365589,
+        "spearman_p": 0.00435142339104161,
+        "pearson_r": -0.31707609776297085,
+        "pearson_p": 0.003924739368167129,
+        "n_samples": 81,
+        "auc_roc": 0.3189024390243903
+      },
+      "nn_metrics": {
+        "spearman_rho": -0.28832309174774606,
+        "spearman_p": 0.009047370536035125,
+        "pearson_r": -0.28398078545092065,
+        "pearson_p": 0.010192455909623001,
+        "n_samples": 81,
+        "auc_roc": 0.3335365853658537
+      }
+    },
+    "Xue": {
+      "description": "322 SPs, WA 0\u201310437 (enzyme activity units)",
+      "is_binary": false,
+      "n_samples": 322,
+      "wa_range": [
+        0.0,
+        10437.36133
+      ],
+      "rf_metrics": {
+        "spearman_rho": -0.27793195588928155,
+        "spearman_p": 4.017731800508492e-07,
+        "pearson_r": -0.2950392921119429,
+        "pearson_p": 6.881007088615104e-08,
+        "n_samples": 322
+      },
+      "nn_metrics": {
+        "spearman_rho": -0.12659769328805523,
+        "spearman_p": 0.02308478506033177,
+        "pearson_r": -0.1830213761067659,
+        "pearson_p": 0.0009691224021151434,
+        "n_samples": 322
+      }
+    },
+    "Zhang-P43": {
+      "description": "114 SPs, WA 0\u2013193 (P43 promoter)",
+      "is_binary": false,
+      "n_samples": 114,
+      "wa_range": [
+        0.0,
+        193.7
+      ],
+      "rf_metrics": {
+        "spearman_rho": -0.21834089925126843,
+        "spearman_p": 0.019607069864262115,
+        "pearson_r": -0.1905691842515269,
+        "pearson_p": 0.042260025407573384,
+        "n_samples": 114
+      },
+      "nn_metrics": {
+        "spearman_rho": -0.19543506082745069,
+        "spearman_p": 0.03717673622213768,
+        "pearson_r": -0.19397684082403324,
+        "pearson_p": 0.038643197073647995,
+        "n_samples": 114
+      }
+    },
+    "Zhang-PglVM": {
+      "description": "114 SPs, WA 0\u2013327 (PglVM promoter)",
+      "is_binary": false,
+      "n_samples": 114,
+      "wa_range": [
+        0.0,
+        327.2
+      ],
+      "rf_metrics": {
+        "spearman_rho": -0.25026432026732376,
+        "spearman_p": 0.0072416963877502795,
+        "pearson_r": -0.23694984242492886,
+        "pearson_p": 0.011139007531065311,
+        "n_samples": 114
+      },
+      "nn_metrics": {
+        "spearman_rho": -0.21357595412463995,
+        "spearman_p": 0.022511230178103723,
+        "pearson_r": -0.21747611709834438,
+        "pearson_p": 0.020108794774639043,
+        "n_samples": 114
+      }
+    }
+  },
+  "zhang_cross_promoter": {
+    "rf_prediction_consistency": 1.0,
+    "nn_prediction_consistency": 1.0,
+    "actual_wa_correlation": 0.9774064125564045,
+    "n_matched": 114,
+    "note": "Same 114 sequences measured under P43 and PglVM promoters. Model predictions depend only on SP sequence embedding, so prediction consistency should be ~1.0. The actual WA correlation indicates how much SP efficiency transfers across promoters."
+  }
+}

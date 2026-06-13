@@ -1,0 +1,11 @@
+{
+  "model": "RandomForest (Grasso params, 156 physicochemical features)",
+  "n_samples": 4421,
+  "n_genes": 135,
+  "rf_standard_test_mse": 1.2460430852809303,
+  "rf_logo_mse": 2.878298092619623,
+  "inflation_factor": 2.3099506964245045,
+  "note": "Companion to the NN LOGO (Script 17): NN inflates 0.96 -> 2.19 (~2.3x). The RF inflating by the same factor confirms the LOGO gap is a property of the gene-overlapping split, not the model.",
+  "seed": 42,
+  "elapsed_minutes": 1.9007596453030904
+}
