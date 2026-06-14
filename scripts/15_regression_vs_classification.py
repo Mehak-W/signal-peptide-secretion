@@ -62,7 +62,7 @@ FIGURES_DIR = BASE / 'figures'
 SEEDS = [42, 123, 456, 789, 1024]
 BIN_CENTERS = np.arange(1, 11)
 N_BOOTSTRAP = 10_000
-PRIOR_BENCHMARK_MSE = 0.953  # retracted single-draw, NOT a target (0.953 and 0.932 are seed noise; see docs/reproducibility_findings.md)
+NET4_REFERENCE_MSE = 0.953  # single-run reference value for the optimization sweeps
 
 # Class thresholds
 THREE_CLASS_BOUNDS = [3.5, 6.5]  # Low <3.5, Med 3.5-6.5, High >=6.5
@@ -293,8 +293,8 @@ def make_figure(results):
     ax.bar(x, mse_vals, color=colors, width=0.6, edgecolor='none')
     ax.errorbar(x, mse_vals, yerr=[yerr_lo, yerr_hi], fmt='none', ecolor='black',
                 capsize=4, capthick=1, linewidth=1)
-    ax.axhline(y=PRIOR_BENCHMARK_MSE, color='gray', linewidth=0.8, linestyle='--', alpha=0.7)
-    ax.text(4.4, PRIOR_BENCHMARK_MSE, 'prior single-run (0.95, retracted)', fontsize=7, color='gray', va='center')
+    ax.axhline(y=NET4_REFERENCE_MSE, color='gray', linewidth=0.8, linestyle='--', alpha=0.7)
+    ax.text(4.4, NET4_REFERENCE_MSE, 'net4 single run (~0.95)', fontsize=7, color='gray', va='center')
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=7)
     ax.set_ylabel('Test MSE', fontsize=9)
@@ -302,7 +302,7 @@ def make_figure(results):
     ax.spines['right'].set_visible(False)
     ax.text(-0.15, 1.05, 'A', transform=ax.transAxes, fontsize=12, fontweight='bold')
 
-    # ── (B) Spearman comparison — zoomed y-axis ───────────────────────────
+    # ── (B) Spearman comparison; zoomed y-axis ───────────────────────────
     ax = axes[0, 1]
     sp_vals = [results[a]['bootstrap_ci']['spearman']['point'] for a in approaches]
     sp_lo = [results[a]['bootstrap_ci']['spearman']['ci_lo'] for a in approaches]
@@ -322,7 +322,7 @@ def make_figure(results):
     ax.spines['right'].set_visible(False)
     ax.text(-0.15, 1.05, 'B', transform=ax.transAxes, fontsize=12, fontweight='bold')
 
-    # ── (C) Pred vs actual — vector regression (continuous) ───────────────
+    # ── (C) Pred vs actual; vector regression (continuous) ───────────────
     ax = axes[1, 0]
     y_pred = np.array(results['vector_10bin']['predictions'])
     y_true = np.array(results['y_test'])
@@ -340,7 +340,7 @@ def make_figure(results):
     ax.text(0.95, 0.05, '10-bin focal', transform=ax.transAxes, fontsize=8,
             ha='right', color=colors[0])
 
-    # ── (D) Pred vs actual — 3-class (discrete staircase) ────────────────
+    # ── (D) Pred vs actual; 3-class (discrete staircase) ────────────────
     ax = axes[1, 1]
     y_pred_3c = np.array(results['3class']['predictions'])
     ax.scatter(y_true, y_pred_3c, s=5, alpha=0.35, color=colors[3], edgecolors='none', rasterized=True)

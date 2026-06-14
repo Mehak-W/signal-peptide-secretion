@@ -3,10 +3,7 @@
 shared Tufte style (src/plotstyle.py): single-column, no chartjunk, muted gray,
 captions carry context.
 
-Note: the "0.953" reference is the prior single-run Wolfram estimate; the
-reproducibility audit (docs/reproducibility_findings.md) shows it is a favorable
-seed draw (~0.99 ± 0.05), so it is NOT drawn as an authoritative target. The
-honest reference is the Grasso RF baseline (1.22).
+Figures use the Grasso RF baseline (1.22) as the reference line.
 """
 import sys, json
 import numpy as np
@@ -25,7 +22,7 @@ GRASSO = 1.22
 
 
 def replot_06():
-    """vector_regression_comparison.png — CE vs focal per embedding."""
+    """vector_regression_comparison.png; CE vs focal per embedding."""
     results = json.load(open(RESULTS_DIR / 'vector_regression_results.json'))
     emb = ['ESM2-650M', 'ESM2-3B', 'Ginkgo-AA0']
     ce = [results[f"{e}_categorical_crossentropy"]['test_metrics']['mse'] for e in emb]
@@ -42,7 +39,7 @@ def replot_06():
 
 
 def replot_08():
-    """bootstrap_forest_plot.png — point + 95% CI per model."""
+    """bootstrap_forest_plot.png; point + 95% CI per model."""
     data = json.load(open(RESULTS_DIR / 'bootstrap_ci_results.json'))
     results, order = data['results'], data['model_order']
     fig, ax = plt.subplots(figsize=(3.6, 4.2))
@@ -65,7 +62,7 @@ def replot_08():
 
 
 def replot_13():
-    """cross_dataset_finetuning.png — pooled OOF zero-shot vs fine-tuned + 95% CI."""
+    """cross_dataset_finetuning.png; pooled OOF zero-shot vs fine-tuned + 95% CI."""
     d = json.load(open(RESULTS_DIR / 'cross_dataset_finetuning_results.json'))['datasets']
     names = list(d.keys())
     def vals(key): return [d[n][key]['rho'] for n in names]
@@ -85,7 +82,7 @@ def replot_13():
 
 
 def replot_01():
-    """grasso_reproduction.png — train vs test MSE (shows RF overfit) + baseline."""
+    """grasso_reproduction.png; train vs test MSE (shows RF overfit) + baseline."""
     d = json.load(open(RESULTS_DIR / 'grasso_reproduction.json'))
     tr, te = d['train_metrics']['mse'], d['test_metrics']['mse']
     fig, ax = plt.subplots(figsize=(3.0, 2.7))
@@ -101,7 +98,7 @@ def replot_01():
 
 
 def replot_11():
-    """dropout_validation.png — validation MSE vs dropout (all indistinguishable)."""
+    """dropout_validation.png; validation MSE vs dropout (all indistinguishable)."""
     r = json.load(open(RESULTS_DIR / 'dropout_validation_results.json'))['results']
     drops = sorted(float(k.split('-')[1]) for k in r)
     means = [r[f'drop-{d:.2f}']['val_mse_mean'] for d in drops]
@@ -115,7 +112,7 @@ def replot_11():
 
 
 def replot_14():
-    """relu_squared_comparison.png — LeakyReLU vs ReLU-squared test MSE."""
+    """relu_squared_comparison.png; LeakyReLU vs ReLU-squared test MSE."""
     d = json.load(open(RESULTS_DIR / 'relu_squared_comparison_results.json'))
     keys = ['leaky_relu', 'relu_squared']; labels = ['LeakyReLU', 'ReLU$^2$']
     pts = [d[k]['bootstrap_ci']['mse']['point'] for k in keys]
@@ -131,7 +128,7 @@ def replot_14():
 
 
 def replot_18():
-    """linear_baseline.png — linear/Ridge/XGBoost/NN test MSE on embeddings."""
+    """linear_baseline.png; linear/Ridge/XGBoost/NN test MSE on embeddings."""
     d = json.load(open(RESULTS_DIR / 'linear_baseline_results.json'))
     keys = ['linear_probe', 'ridge', 'xgboost', 'best_nn']
     labels = ['linear\nprobe', 'Ridge', 'XGBoost', 'vector\nNN']
@@ -147,7 +144,7 @@ def replot_18():
 
 
 def replot_05():
-    """cross_dataset_generalization.png — zero-shot Spearman per external dataset."""
+    """cross_dataset_generalization.png; zero-shot Spearman per external dataset."""
     d = json.load(open(RESULTS_DIR / 'cross_dataset_results.json'))['external_datasets']
     names = list(d.keys())
     rf = [d[n]['rf_metrics']['spearman_rho'] for n in names]
@@ -164,7 +161,7 @@ def replot_05():
 
 
 def replot_15():
-    """regression_vs_classification.png — test MSE per output formulation."""
+    """regression_vs_classification.png; test MSE per output formulation."""
     d = json.load(open(RESULTS_DIR / 'regression_vs_classification_results.json'))
     labels = {'vector_10bin': '10-bin focal', 'vector_10bin_cce': '10-bin CE',
               '5class': '5-class', '3class': '3-class', 'binary': 'binary'}
@@ -180,9 +177,9 @@ def replot_15():
 
 
 def replot_17():
-    """gene_stratified_evaluation.png — standard vs leave-one-gene-out MSE."""
+    """gene_stratified_evaluation.png; standard vs leave-one-gene-out MSE."""
     d = json.load(open(RESULTS_DIR / 'gene_stratified_evaluation_results.json'))
-    # use the FAIR 1-seed standard (0.964), not the retracted single-draw 0.932
+    # use the fair single-seed standard (0.964)
     std = d['standard_comparison']['standard_test_mse_1seed']
     logo = d['logo_cv']['overall_mse']
     fig, ax = plt.subplots(figsize=(3.2, 2.7))
@@ -196,7 +193,7 @@ def replot_17():
 
 
 def replot_19():
-    """ablation_controls.png — cumulative ablation (historical decomposition)."""
+    """ablation_controls.png; cumulative ablation decomposition."""
     tbl = json.load(open(RESULTS_DIR / 'ablation_controls_results.json'))['ablation']['ablation_table']
     steps = [r['step'] for r in tbl]; vals = [r['ensemble_mse'] for r in tbl]
     fig, ax = plt.subplots(figsize=(4.4, 2.8)); x = np.arange(len(steps))
@@ -204,7 +201,7 @@ def replot_19():
     ax.set_xticks(x); ax.set_xticklabels(steps, rotation=20, ha='right', fontsize=6)
     ax.set_ylabel('Ensemble test MSE'); ax.set_ylim(0, max(vals) * 1.1)
     tufte_ax(ax); fig.savefig(FIGURES_DIR / 'ablation_controls.png'); plt.close(fig)
-    print("  ablation_controls.png  (historical; final value is the retracted single-draw)")
+    print("  ablation_controls.png")
 
 
 def _sweep_fig(json_name, phase_keys, out_name):

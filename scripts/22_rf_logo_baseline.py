@@ -9,8 +9,8 @@ the LOGO inflation is a property of the gene-overlapping split, not of any one
 model class.
 
 If the inflation factor for the RF (physicochemical features) matches that of
-the NN (PLM embeddings), the ~99.8%-gene-overlap in the standard split -- not
-the model -- is what flatters the standard test MSE.
+the NN (PLM embeddings), the ~99.8%-gene-overlap in the standard split (not
+the model) is what flatters the standard test MSE.
 
 Outputs:
   - results/rf_logo_baseline.json

@@ -107,8 +107,8 @@ def search_one_feature_type(name, X_train, X_test, y_train, y_test, rng):
     for i, config in enumerate(configs):
         log_transform = config.pop('log_transform')
 
-        # Split BEFORE scaling so the validation set — which SELECTS the best
-        # config below — never informs the scaler. Fitting the scaler on the
+        # Split BEFORE scaling so the validation set (which SELECTS the best
+        # config below) never informs the scaler. Fitting the scaler on the
         # full training set first leaks the validation rows' statistics into
         # their own normalization and biases the selection metric.
         X_tr_raw, y_tr_raw, X_val_raw, y_val_raw = train_val_split(

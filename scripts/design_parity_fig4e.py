@@ -2,14 +2,14 @@
 """Design-task evaluation vs Grasso et al. Figure 4e.
 
 Grasso Fig 4e: 11 of 15 hand-picked, independently (NLR-) validated designs fell
-within +/-1 WA of prediction (73%). We evaluate our models on the FULL design
+within +/-1 WA of prediction (73%). I evaluate my models on the FULL design
 library (predicted vs library-measured WA) and report the comparable +/-1-WA
 fraction, plus a parity plot (RF = open marker, NN = filled; PhysChem = circle,
 ESM2 = square), with the y=x line and Grasso's 73% reference.
 
 Note: not a strict apples-to-apples comparison (his 15 were curated and
-independently re-assayed; ours is the full, unselected, noisier library) — the
-honest, lower-bias evaluation.
+independently re-assayed; mine is the full, unselected, noisier library); the
+lower-bias evaluation.
 """
 import os, sys, json
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'

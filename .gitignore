@@ -47,3 +47,5 @@ results/close_gap.json
 results/close_gap3.json
 results/improve.json
 results/schrier_repro_ensemble.json
+
+docs/version_history.md

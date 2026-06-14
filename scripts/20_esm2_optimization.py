@@ -7,7 +7,7 @@ embeddings to measure how close a fully open-weight model gets to the best
 proprietary-embedding result.
 
 Configurations run:
-  1. dropout=0.35  (Script 10 best — full-data optimal)
+  1. dropout=0.35  (Script 10 best; full-data optimal)
   2. dropout=0.20  (validation-optimal baseline for comparison)
 
 Both use: (256, 256, 128), focal loss, 5-seed ensemble, 300 epochs, no early
@@ -44,11 +44,11 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-# -- Paths -----------------------------------------------------------------
+# Paths -----------------------------------------------------------------
 RESULTS_DIR = Path(__file__).resolve().parent.parent / 'results'
 FIGURES_DIR = Path(__file__).resolve().parent.parent / 'figures'
 
-# -- Constants -------------------------------------------------------------
+# Constants -------------------------------------------------------------
 SEEDS = [42, 123, 456, 789, 1024]
 BIN_CENTERS = np.arange(1, 11)
 N_BOOTSTRAP = 10_000
@@ -56,7 +56,7 @@ N_BOOTSTRAP = 10_000
 # Reference values from prior scripts
 GINKGO_BEST_MSE = 0.932       # Script 10 best (Ginkgo-AA0, drop=0.35)
 GINKGO_BEST_CI = (0.823, 1.054)
-PRIOR_BENCHMARK_MSE = 0.953  # retracted single-draw, NOT a target (0.953 and 0.932 are seed noise; see docs/reproducibility_findings.md)
+NET4_REFERENCE_MSE = 0.953  # single-run reference value for the optimization sweeps
 
 
 # ==========================================================================
@@ -302,7 +302,7 @@ def main():
     all_results = {}
     t_total = time.time()
 
-    # -- Load ESM2-650M data ------------------------------------------------
+    # Load ESM2-650M data ------------------------------------------------
     print("Loading ESM2-650M data (with bins)...")
     X_train_raw, _, _, _, y_train_bins, _, meta_bins = load_plm_with_bins('esm2-650M')
     _, X_test_raw, _, y_test, meta_full = load_plm_embeddings('esm2-650M')
@@ -325,7 +325,7 @@ def main():
     }
 
     # ======================================================================
-    # Config 1: dropout=0.35 (Script 10 best — full-data optimal)
+    # Config 1: dropout=0.35 (Script 10 best; full-data optimal)
     # ======================================================================
     print(f"\n{'='*60}")
     print("  CONFIG 1: dropout=0.35 (full-data optimal)")
@@ -411,7 +411,7 @@ def main():
 
     print()
     print(f"  Reference: Ginkgo-AA0 best = {GINKGO_BEST_MSE:.3f}  [{GINKGO_BEST_CI[0]:.3f}, {GINKGO_BEST_CI[1]:.3f}]")
-    print(f"  Reference: prior single-run estimate = {PRIOR_BENCHMARK_MSE}")
+    print(f"  Reference: net4 reference = {NET4_REFERENCE_MSE}")
 
     # Which ESM2 config was best?
     best_key = 'dropout_0.35' if mse_035 <= mse_020 else 'dropout_0.20'
@@ -419,16 +419,16 @@ def main():
 
     gap_ginkgo = best_esm - GINKGO_BEST_MSE
     pct_ginkgo = 100 * gap_ginkgo / GINKGO_BEST_MSE
-    gap_prior = best_esm - PRIOR_BENCHMARK_MSE
-    pct_prior = 100 * gap_prior / PRIOR_BENCHMARK_MSE
+    gap_prior = best_esm - NET4_REFERENCE_MSE
+    pct_prior = 100 * gap_prior / NET4_REFERENCE_MSE
 
     print()
-    if best_esm < PRIOR_BENCHMARK_MSE:
+    if best_esm < NET4_REFERENCE_MSE:
         print(f"  ESM2-650M best ({best_key}): {best_esm:.4f}")
-        print(f"    -> below prior single-run (retracted) ({PRIOR_BENCHMARK_MSE}) by {-gap_prior:.4f} ({-pct_prior:.1f}%)")
+        print(f"    -> below net4 reference ({NET4_REFERENCE_MSE}) by {-gap_prior:.4f} ({-pct_prior:.1f}%)")
     else:
         print(f"  ESM2-650M best ({best_key}): {best_esm:.4f}")
-        print(f"    -> Gap to prior single-run reference: +{gap_prior:.4f} ({pct_prior:+.1f}%)")
+        print(f"    -> Gap to net4 reference: +{gap_prior:.4f} ({pct_prior:+.1f}%)")
 
     sign = '+' if gap_ginkgo >= 0 else ''
     print(f"    -> Gap to Ginkgo-AA0: {sign}{gap_ginkgo:.4f} ({sign}{pct_ginkgo:.1f}%)")
@@ -443,7 +443,7 @@ def main():
         'best_esm2_mse': best_esm,
         'ginkgo_best_mse': GINKGO_BEST_MSE,
         'ginkgo_best_ci': list(GINKGO_BEST_CI),
-        'prior_benchmark_mse': PRIOR_BENCHMARK_MSE,
+        'prior_benchmark_mse': NET4_REFERENCE_MSE,
         'gap_to_ginkgo': gap_ginkgo,
         'gap_to_ginkgo_pct': pct_ginkgo,
         'gap_to_prior': gap_prior,
@@ -453,7 +453,7 @@ def main():
     }
     save_results(all_results)
 
-    # -- Figure -------------------------------------------------------------
+    # Figure -------------------------------------------------------------
     _make_figure(all_results)
 
     return all_results

@@ -111,7 +111,7 @@ def evaluate_on_external(y_true, y_pred, is_binary=False):
     """Compute generalization metrics (scale-invariant)."""
     result = {}
 
-    # Spearman rank correlation (primary metric — scale-invariant)
+    # Spearman rank correlation (primary metric; scale-invariant)
     sp_rho, sp_p = stats.spearmanr(y_true, y_pred)
     result['spearman_rho'] = float(sp_rho)
     result['spearman_p'] = float(sp_p)
@@ -260,7 +260,7 @@ def main():
 
     # ── 6. Zhang cross-promoter analysis ─────────────────────────────────
     # The P43 and PglVM files contain the same 114 sequences in DIFFERENT
-    # row order. We must match by sequence before comparing predictions.
+    # row order. I must match by sequence before comparing predictions.
     print(f"\n{'='*60}")
     print("  Zhang Cross-Promoter Consistency Analysis")
     print(f"{'='*60}")

@@ -7,7 +7,7 @@ Trains the best 5-seed vector NN ensemble (Script 10 config) and persists:
   - models/scaler.joblib
   - models/config.json
 
-This is infrastructure — no figures generated. After saving, validates
+This is infrastructure; no figures generated. After saving, validates
 round-trip by reloading and checking predictions match.
 """
 import sys

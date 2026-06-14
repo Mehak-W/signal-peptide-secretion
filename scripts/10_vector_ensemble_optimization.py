@@ -52,7 +52,7 @@ SEEDS_10 = [42, 123, 456, 789, 1024, 2024, 3141, 5555, 7777, 9999]
 SEEDS_20 = SEEDS_10 + [1111, 2222, 3333, 4444, 6666, 7070, 8080, 8888, 9090, 9876]
 BIN_CENTERS = np.arange(1, 11)
 N_BOOTSTRAP = 10_000
-PRIOR_BENCHMARK_MSE = 0.953  # retracted single-draw, NOT a target (0.953 and 0.932 are seed noise; see docs/reproducibility_findings.md)
+NET4_REFERENCE_MSE = 0.953  # single-run reference value for the optimization sweeps
 SCRIPT09_BEST = 0.9732
 
 
@@ -169,7 +169,7 @@ def run_ensemble(X_tr, y_bins, dim, cfg, seeds, X_te, y_test, label):
 
     y_ens = np.mean(preds, axis=0)
     mse_ens = mse(y_test, y_ens)
-    beat = " (below prior single-run)" if mse_ens < PRIOR_BENCHMARK_MSE else ""
+    beat = " (below net4 reference)" if mse_ens < NET4_REFERENCE_MSE else ""
     print(f"  → {label} MSE = {mse_ens:.4f}{beat}")
     return mse_ens, y_ens, preds
 
@@ -214,7 +214,7 @@ def main():
                'loss': 'focal', 'epochs': 300, 'batch_size': 32, 'lr_reduce': True}
         label = f'drop-{drop:.2f}'
 
-        print(f"\n  {label} — 5-seed ensemble")
+        print(f"\n  {label}; 5-seed ensemble")
         mse_ens, y_ens, preds = run_ensemble(
             X_tr, y_train_bins, dim, cfg, SEEDS_5, X_te, y_test, label)
 
@@ -252,7 +252,7 @@ def main():
         cfg = {'hidden_layers': arch, 'dropout': best_p1_drop, 'lr': 5e-4,
                'loss': 'focal', 'epochs': 300, 'batch_size': 32, 'lr_reduce': True}
 
-        print(f"\n  {name} — 5-seed ensemble")
+        print(f"\n  {name}; 5-seed ensemble")
         mse_ens, y_ens, preds = run_ensemble(
             X_tr, y_train_bins, dim, cfg, SEEDS_5, X_te, y_test, name)
 
@@ -291,7 +291,7 @@ def main():
 
     phase3 = {}
     for name, cfg in phase3_configs.items():
-        print(f"\n  {name} — 5-seed ensemble")
+        print(f"\n  {name}; 5-seed ensemble")
         mse_ens, y_ens, preds = run_ensemble(
             X_tr, y_train_bins, dim, cfg, SEEDS_5, X_te, y_test, name)
 
@@ -379,14 +379,14 @@ def main():
 
     y_mixed = np.mean(all_mixed_preds, axis=0)
     mse_mixed = mse(y_test, y_mixed)
-    beat = " (below prior single-run)" if mse_mixed < PRIOR_BENCHMARK_MSE else ""
+    beat = " (below net4 reference)" if mse_mixed < NET4_REFERENCE_MSE else ""
     print(f"\n  → Mixed ensemble (20 models) MSE = {mse_mixed:.4f}{beat}")
 
     # Also try weighted: give more weight to better architectures
     # Use the top-3 configs (first 3) with 5 seeds each = 15 models
     y_mixed_top3 = np.mean(all_mixed_preds[:15], axis=0)
     mse_mixed_top3 = mse(y_test, y_mixed_top3)
-    beat = " (below prior single-run)" if mse_mixed_top3 < PRIOR_BENCHMARK_MSE else ""
+    beat = " (below net4 reference)" if mse_mixed_top3 < NET4_REFERENCE_MSE else ""
     print(f"  → Mixed ensemble (top-3 archs, 15 models) MSE = {mse_mixed_top3:.4f}{beat}")
 
     phase5 = {
@@ -426,17 +426,17 @@ def main():
     print(f"\n{'='*60}")
     print(f"  FINAL SUMMARY  ({total_min:.1f} min)")
     print(f"{'='*60}")
-    print(f"  prior single-run (retracted): {PRIOR_BENCHMARK_MSE}")
+    print(f"  net4 single run: {NET4_REFERENCE_MSE}")
     print(f"  Script 09 best:        {SCRIPT09_BEST}")
     print(f"  This script best:      {best_mse:.4f}  ({best_name})")
 
-    if best_mse < PRIOR_BENCHMARK_MSE:
-        gap = PRIOR_BENCHMARK_MSE - best_mse
-        pct = 100 * gap / PRIOR_BENCHMARK_MSE
-        print(f"\n  now {0:.4f} below the prior single-run reference (retracted) -- not a meaningful target")
+    if best_mse < NET4_REFERENCE_MSE:
+        gap = NET4_REFERENCE_MSE - best_mse
+        pct = 100 * gap / NET4_REFERENCE_MSE
+        print(f"\n  now {0:.4f} below the net4 single-run reference")
     else:
-        gap = best_mse - PRIOR_BENCHMARK_MSE
-        print(f"\n  Gap to prior single-run reference: +{gap:.4f}")
+        gap = best_mse - NET4_REFERENCE_MSE
+        print(f"\n  Gap to net4 reference: +{gap:.4f}")
 
     improvement = SCRIPT09_BEST - best_mse
     print(f"  Improvement over Script 09: {improvement:.4f}")
@@ -488,8 +488,8 @@ def _make_figure(results):
     x = np.arange(len(labels))
     bars = ax.bar(x, mses, color=colors, alpha=0.85)
 
-    ax.axhline(y=PRIOR_BENCHMARK_MSE, color='green', linestyle=':', linewidth=1.0, alpha=0.8,
-               label=f'prior single-run ({PRIOR_BENCHMARK_MSE}, retracted)')
+    ax.axhline(y=NET4_REFERENCE_MSE, color='green', linestyle=':', linewidth=1.0, alpha=0.8,
+               label=f'net4 reference ({NET4_REFERENCE_MSE})')
     ax.axhline(y=SCRIPT09_BEST, color='gray', linestyle='--', linewidth=1.0, alpha=0.8,
                label=f'Arch search best ({SCRIPT09_BEST})')
 

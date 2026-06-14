@@ -3,9 +3,9 @@
 Script 06: Vector Regression with Focal Loss
 
 Predicts 10-dimensional bin probability distributions instead of scalar WA.
-Matches Schrier's approach (MSE 0.95 in Wolfram).
+Matches Dr. Schrier's approach (MSE 0.95 in Wolfram).
 
-Architecture (matching Schrier's Wolfram network 4):
+Architecture (matching Dr. Schrier's Wolfram network 4):
   - Dense(256) -> LeakyReLU -> Dropout(0.2)
   - Dense(256) -> LeakyReLU -> Dropout(0.2)
   - Dense(10, softmax)
@@ -71,7 +71,7 @@ def verify_bin_integrity(y_bins, y_wa, label):
     assert max_sum_err < 0.01, f"{label}: bin sums deviate by {max_sum_err:.4f} (max)"
     print(f"  {label}: bin sum max deviation = {max_sum_err:.6f} (OK, < 0.01)")
 
-    # Check WA consistency (informational — WA was computed from raw reads,
+    # Check WA consistency (informational; WA was computed from raw reads,
     # not from binned percentages, so some discrepancy is expected)
     wa_from_bins = bins_to_wa(y_bins)
     wa_diff = np.abs(wa_from_bins - y_wa)
@@ -79,7 +79,7 @@ def verify_bin_integrity(y_bins, y_wa, label):
     mean_wa_err = np.mean(wa_diff)
     median_wa_err = np.median(wa_diff)
     n_close = np.sum(wa_diff < 0.05)
-    print(f"  {label}: WA from bins — median diff = {median_wa_err:.4f}, "
+    print(f"  {label}: WA from bins; median diff = {median_wa_err:.4f}, "
           f"mean = {mean_wa_err:.4f}, max = {max_wa_err:.4f}, "
           f"exact match (<0.05): {n_close}/{len(y_wa)} ({100*n_close/len(y_wa):.1f}%)")
 
@@ -247,7 +247,7 @@ def main():
         print(f"  {key:<30} {m['mse']:>10.4f} {m['r2']:>8.4f} "
               f"{m['spearman_rho']:>10.4f} {r['elapsed_seconds']:>7.1f}s")
 
-    print(f"\n  prior single-run (retracted): MSE = 0.95")
+    print(f"\n  net4 single run: MSE = 0.95")
     print(f"  Script 03 best (NN Ginkgo-AA0): MSE = 1.0497")
 
     # ── 4. Figure ──────────────────────────────────────────────────────────
@@ -289,7 +289,7 @@ def _make_figure(results):
     ax.axhline(y=1.0497, color='gray', linewidth=1.0, linestyle='--', alpha=0.8,
                label='NN Regression Best (1.05)')
     ax.axhline(y=0.95, color='green', linewidth=1.0, linestyle=':', alpha=0.8,
-               label='prior single-run (0.95, retracted)')
+               label='net4 single run (~0.95)')
 
     # Labels
     ax.set_ylabel('Test MSE')

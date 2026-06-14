@@ -11,7 +11,7 @@ SignalPeptideVectorNN: Vector regression network for bin probability prediction.
   - Output: Dense(10, softmax)
   - Loss: FocalLoss or categorical_crossentropy
 
-ReLUSquared: Custom activation layer — ReLU²(x) = max(0,x)².
+ReLUSquared: Custom activation layer; ReLU²(x) = max(0,x)².
   Ref: So et al. (2021) "Primer: Searching for Efficient Transformers."
 """
 import json
@@ -162,7 +162,7 @@ class SignalPeptideVectorNN:
     """
     Vector regression network for 10-dim bin probability prediction.
 
-    Architecture (matching Schrier's Wolfram network):
+    Architecture (matching Dr. Schrier's Wolfram network):
         For each hidden layer: Dense(units) -> LeakyReLU -> Dropout
         Output: Dense(10, softmax)
 

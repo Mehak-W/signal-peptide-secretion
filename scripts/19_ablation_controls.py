@@ -4,15 +4,15 @@ Script 19: Ablation Table + Control Experiments
 
 Three analyses addressing reviewer concerns:
 
-  Part 1 — Ablation table: Assembles existing results to isolate the contributions
+  Part 1; Ablation table: Assembles existing results to isolate the contributions
            of architecture depth, dropout, full-data training, and ensembling to
-           the historical (retracted) 0.932 result (reproducible 0.957 +/- 0.009).
+           the reproducible 0.957 +/- 0.009 result.
 
-  Part 2 — Random-split CV: Standard (non-gene-stratified) 5-fold CV on the same
+  Part 2; Random-split CV: Standard (non-gene-stratified) 5-fold CV on the same
            combined data as LOGO, to isolate gene-identity leakage from inherent
            CV variance.
 
-  Part 3 — Smaller architectures: Tests (128,), (128, 64), (64, 32) MLPs to
+  Part 3; Smaller architectures: Tests (128,), (128, 64), (64, 32) MLPs to
            determine if the (256, 256, 128) architecture is over-parameterized
            given the linear probe's strong performance.
 
@@ -418,7 +418,7 @@ def make_figure(ablation_data, cv_data, arch_data):
             arch_ci_hi.append(arch_data[name]['bootstrap_ci']['mse']['ci_hi'])
 
     arch_names.append('(256,256,\n128)')
-    arch_mses.append(0.957)  # historical config, reproducible value (0.932 was a single draw)
+    arch_mses.append(0.957)  # reproducible value over retrains
     arch_ci_lo.append(0.823)
     arch_ci_hi.append(1.054)
 

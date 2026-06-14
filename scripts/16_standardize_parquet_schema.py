@@ -15,17 +15,17 @@ Consolidates all datasets into a unified schema:
   | dataset_source | str       | grasso / wu / xue / zhang_p43 / zhang_pglvm |
 
 Datasets standardized:
-  - Grasso train (3095) — has bins + gene from xlsx merge
-  - Grasso test (1326) — same
-  - Grasso design (4911) — no bins, gene from xlsx
-  - Wu (81) — 3 cols only
-  - Xue (322) — same
-  - Zhang-P43 (114) — same
-  - Zhang-PglVM (114) — same
+  - Grasso train (3095); has bins + gene from xlsx merge
+  - Grasso test (1326); same
+  - Grasso design (4911); no bins, gene from xlsx
+  - Wu (81); 3 cols only
+  - Xue (322); same
+  - Zhang-P43 (114); same
+  - Zhang-PglVM (114); same
 
 Outputs:
-  - data/unified/{dataset_source}.parquet — per-dataset files
-  - data/unified/all_datasets_esm2_650M.parquet — combined file
+  - data/unified/{dataset_source}.parquet; per-dataset files
+  - data/unified/all_datasets_esm2_650M.parquet; combined file
 """
 import sys
 import numpy as np

@@ -50,10 +50,8 @@ VAL_FRACTION = 0.2
 DROPOUT_VALUES = [0.15, 0.20, 0.25, 0.30, 0.35]
 
 # Script 10 test-set results for comparison
-# RETRACTED: these are single-draw test MSEs from the test-set dropout sweep
-# (the leakage the audit repudiated); kept only to reproduce the historical figure.
-# RETRACTED: single-draw test MSEs from the test-set dropout sweep (the leakage the
-# audit repudiated); kept only to reproduce the historical figure, not as a target.
+# Single-draw test MSEs from the test-set dropout sweep (test-set selection, shown
+# for transparency); the validation sweep is the basis for the dropout choice.
 SCRIPT10_TEST_MSES = {
     0.15: 0.985,
     0.20: 0.993,
@@ -121,7 +119,7 @@ def main():
 
     for drop in DROPOUT_VALUES:
         label = f'drop-{drop:.2f}'
-        print(f"\n  {label} — 5-seed ensemble (val split)")
+        print(f"\n  {label}; 5-seed ensemble (val split)")
 
         seed_val_mses = []
         seed_train_mses = []

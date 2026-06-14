@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Decisive reproducible-headline test: vector NN on ProtT5 (open) vs AA-0 vs
+"""Reproducible-headline test: vector NN on ProtT5 (open) vs AA-0 vs
 ESM2, and open-model ensembles. Base (256,256,128)/PReLU/dropout0.3/focal,
 5-seed, mean over R retrains."""
 import os, sys, json, time

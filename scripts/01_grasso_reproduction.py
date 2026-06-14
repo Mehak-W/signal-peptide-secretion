@@ -94,7 +94,7 @@ def main():
 
     pct_diff = (test_metrics['mse'] - GRASSO_BASELINE_MSE) / GRASSO_BASELINE_MSE * 100
     print(f"\n  Grasso baseline MSE: {GRASSO_BASELINE_MSE}")
-    print(f"  Our test MSE:        {test_metrics['mse']:.4f}")
+    print(f"  My test MSE:        {test_metrics['mse']:.4f}")
     print(f"  Difference:          {pct_diff:+.1f}%")
 
     # ── 6. Save results ───────────────────────────────────────────────

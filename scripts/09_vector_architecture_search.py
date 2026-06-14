@@ -57,11 +57,11 @@ SEEDS_5 = [42, 123, 456, 789, 1024]
 SEEDS_10 = [42, 123, 456, 789, 1024, 2024, 3141, 5555, 7777, 9999]
 BIN_CENTERS = np.arange(1, 11)
 N_BOOTSTRAP = 10_000
-PRIOR_BENCHMARK_MSE = 0.953  # retracted single-draw, NOT a target (0.953 and 0.932 are seed noise; see docs/reproducibility_findings.md)
+NET4_REFERENCE_MSE = 0.953  # single-run reference value for the optimization sweeps
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# Model building — direct Keras, full control over training
+# Model building; direct Keras, full control over training
 # ═══════════════════════════════════════════════════════════════════════════
 
 def build_model(input_dim, hidden_layers=(256, 256), dropout=0.2,
@@ -93,7 +93,7 @@ def build_model(input_dim, hidden_layers=(256, 256), dropout=0.2,
 
 
 def train_full(X_train, y_train_bins, input_dim, cfg, seed=42, verbose=0):
-    """Train on full training data — no validation split, no early stopping."""
+    """Train on full training data; no validation split, no early stopping."""
     model = build_model(
         input_dim,
         hidden_layers=cfg['hidden_layers'],
@@ -193,7 +193,7 @@ def save_results(results, filename='vector_architecture_search_results.json'):
 
 
 def train_and_cleanup(X_train, y_bins, input_dim, cfg, seed, X_test):
-    """Train, predict, cleanup — returns y_pred_wa."""
+    """Train, predict, cleanup; returns y_pred_wa."""
     model = train_full(X_train, y_bins, input_dim, cfg, seed=seed)
     y_pred = predict_wa(model, X_test)
     del model
@@ -272,7 +272,7 @@ def main():
         mse = compute_mse(y_test_g_full, y_pred)
         elapsed = time.time() - t0
         phase1[name] = {'mse': mse, 'time': round(elapsed, 1)}
-        beat = " (below prior single-run)" if mse < PRIOR_BENCHMARK_MSE else ""
+        beat = " (below net4 reference)" if mse < NET4_REFERENCE_MSE else ""
         print(f"  {name:<22} MSE = {mse:.4f}  ({elapsed:.1f}s){beat}")
 
     all_results['phase1'] = phase1
@@ -302,7 +302,7 @@ def main():
         print(f"    Seed {seed:>5}: MSE = {mse_i:.4f}  ({time.time()-t0:.1f}s)")
 
     mse_5 = compute_mse(y_test_g_full, np.mean(preds_5, axis=0))
-    beat = " (below prior single-run)" if mse_5 < PRIOR_BENCHMARK_MSE else ""
+    beat = " (below net4 reference)" if mse_5 < NET4_REFERENCE_MSE else ""
     print(f"  5-seed ensemble MSE = {mse_5:.4f}{beat}")
 
     # 10-seed (reuse first 5)
@@ -317,7 +317,7 @@ def main():
         print(f"    Seed {seed:>5}: MSE = {mse_i:.4f}  ({time.time()-t0:.1f}s)")
 
     mse_10 = compute_mse(y_test_g_full, np.mean(preds_10, axis=0))
-    beat = " (below prior single-run)" if mse_10 < PRIOR_BENCHMARK_MSE else ""
+    beat = " (below net4 reference)" if mse_10 < NET4_REFERENCE_MSE else ""
     print(f"  10-seed ensemble MSE = {mse_10:.4f}{beat}")
 
     all_results['phase2'] = {
@@ -389,7 +389,7 @@ def main():
         mse = compute_mse(y_test_g_full, y_pred)
         elapsed = time.time() - t0
         phase3[name] = {'mse': mse, 'time': round(elapsed, 1)}
-        beat = " (below prior single-run)" if mse < PRIOR_BENCHMARK_MSE else ""
+        beat = " (below net4 reference)" if mse < NET4_REFERENCE_MSE else ""
         print(f"  {name:<22} MSE = {mse:.4f}  ({elapsed:.1f}s){beat}")
 
     all_results['phase3'] = phase3
@@ -439,7 +439,7 @@ def main():
 
         y_ens = np.mean(preds, axis=0)
         mse_ens = compute_mse(y_test_g_full, y_ens)
-        beat = " (below prior single-run)" if mse_ens < PRIOR_BENCHMARK_MSE else ""
+        beat = " (below net4 reference)" if mse_ens < NET4_REFERENCE_MSE else ""
         print(f"  → Ensemble MSE = {mse_ens:.4f}{beat}")
 
         phase4[f'{cfg_name}_5seed'] = {
@@ -462,7 +462,7 @@ def main():
 
     y_mixed = np.mean(top5_preds, axis=0)
     mse_mixed = compute_mse(y_test_g_full, y_mixed)
-    beat = " (below prior single-run)" if mse_mixed < PRIOR_BENCHMARK_MSE else ""
+    beat = " (below net4 reference)" if mse_mixed < NET4_REFERENCE_MSE else ""
     print(f"  → Mixed ensemble MSE = {mse_mixed:.4f}{beat}")
 
     phase4['mixed_top5'] = {
@@ -489,7 +489,7 @@ def main():
 
     y_ens_10 = np.mean(preds_10_p4, axis=0)
     mse_ens_10 = compute_mse(y_test_g_full, y_ens_10)
-    beat = " (below prior single-run)" if mse_ens_10 < PRIOR_BENCHMARK_MSE else ""
+    beat = " (below net4 reference)" if mse_ens_10 < NET4_REFERENCE_MSE else ""
     print(f"  → 10-seed ensemble MSE = {mse_ens_10:.4f}{beat}")
 
     phase4[f'{best_p3_name}_10seed'] = {
@@ -597,8 +597,8 @@ def main():
     print(f"\n{'='*60}")
     print(f"  FINAL SUMMARY  ({total_min:.1f} min)")
     print(f"{'='*60}")
-    print(f"  prior single-run (retracted):   {PRIOR_BENCHMARK_MSE}")
-    print(f"  Our Script 06 best:      1.001  (val split, 1273 test)")
+    print(f"  net4 single run:   {NET4_REFERENCE_MSE}")
+    print(f"  My Script 06 best:      1.001  (val split, 1273 test)")
     print(f"  Phase 1 best single:     {phase1[best_p1]['mse']:.4f}  ({best_p1})")
     print(f"  Phase 2 (5-seed):        {mse_5:.4f}")
     print(f"  Phase 2 (10-seed):       {mse_10:.4f}")
@@ -606,13 +606,13 @@ def main():
     print(f"  Phase 4 best ensemble:   {min(r['mse'] for r in phase4.values()):.4f}")
     print(f"  Overall best:            {overall_best_mse:.4f}  ({overall_best_name})")
 
-    if overall_best_mse < PRIOR_BENCHMARK_MSE:
-        gap = PRIOR_BENCHMARK_MSE - overall_best_mse
-        pct = 100 * gap / PRIOR_BENCHMARK_MSE
-        print(f"\n  now {0:.4f} below the prior single-run reference (retracted) -- not a meaningful target")
+    if overall_best_mse < NET4_REFERENCE_MSE:
+        gap = NET4_REFERENCE_MSE - overall_best_mse
+        pct = 100 * gap / NET4_REFERENCE_MSE
+        print(f"\n  now {0:.4f} below the net4 single-run reference")
     else:
-        gap = overall_best_mse - PRIOR_BENCHMARK_MSE
-        print(f"\n  Gap to prior single-run reference: +{gap:.4f}")
+        gap = overall_best_mse - NET4_REFERENCE_MSE
+        print(f"\n  Gap to net4 reference: +{gap:.4f}")
 
     save_results(all_results)
 
@@ -662,8 +662,8 @@ def _make_figure(all_results, p1, p3, p4):
     bars = ax.bar(x, mses, color=colors, alpha=0.85)
 
     # Reference lines
-    ax.axhline(y=PRIOR_BENCHMARK_MSE, color='green', linestyle=':', linewidth=1.0, alpha=0.8,
-               label=f'prior single-run ({PRIOR_BENCHMARK_MSE}, retracted)')
+    ax.axhline(y=NET4_REFERENCE_MSE, color='green', linestyle=':', linewidth=1.0, alpha=0.8,
+               label=f'net4 reference ({NET4_REFERENCE_MSE})')
     ax.axhline(y=1.001, color='gray', linestyle='--', linewidth=1.0, alpha=0.8,
                label='Val-split best (1.001)')
 

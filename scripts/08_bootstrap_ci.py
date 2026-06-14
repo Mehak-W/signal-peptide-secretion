@@ -325,7 +325,7 @@ def make_forest_plot(results, model_order):
     ax.axvline(x=1.22, color='red', linestyle='--', linewidth=1.0, alpha=0.8,
                label='Baseline (1.22)', zorder=0)
     ax.axvline(x=0.95, color='green', linestyle=':', linewidth=1.0, alpha=0.8,
-               label='prior single-run (0.95, retracted)', zorder=0)
+               label='net4 single run (~0.95)', zorder=0)
 
     ax.set_yticks(y_pos)
     ax.set_yticklabels(labels, fontsize=9)
@@ -340,7 +340,7 @@ def make_forest_plot(results, model_order):
         Line2D([0], [0], marker='o', color='darkorange', label='Vector models',
                markersize=7, linewidth=2),
         Line2D([0], [0], color='red', linestyle='--', label='Baseline (1.22)'),
-        Line2D([0], [0], color='green', linestyle=':', label='prior single-run (0.95, retracted)'),
+        Line2D([0], [0], color='green', linestyle=':', label='net4 single run (~0.95)'),
     ]
     ax.legend(handles=legend_elements, loc='lower right', fontsize=9)
 
@@ -379,7 +379,7 @@ def main():
         ft = cfg['feature_type']
         X_train, X_test, y_train, y_test, meta = all_data[ft]
 
-        # Preprocess (StandardScaler, auto log — matches Script 02)
+        # Preprocess (StandardScaler, auto log; matches Script 02)
         X_tr, X_te, y_tr, y_te, prep_info = preprocess(
             X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy(),
             scale_features=True, log_transform_target='auto',

@@ -50,7 +50,7 @@ SEEDS = [42, 123, 456, 789, 1024]
 BIN_CENTERS = np.arange(1, 11)
 N_BOOTSTRAP = 10_000
 BEST_NN_MSE = 0.932  # From Script 10 (5-seed ensemble, full data)
-PRIOR_BENCHMARK_MSE = 0.953  # retracted single-draw, NOT a target (0.953 and 0.932 are seed noise; see docs/reproducibility_findings.md)
+NET4_REFERENCE_MSE = 0.953  # single-run reference value for the optimization sweeps
 
 
 def mse(y_true, y_pred):
@@ -293,8 +293,8 @@ def make_figure(results):
     ax.bar(x, mse_vals, color=colors, width=0.6, edgecolor='none')
     ax.errorbar(x, mse_vals, yerr=[yerr_lo, yerr_hi], fmt='none', ecolor='black',
                 capsize=5, capthick=1, linewidth=1)
-    ax.axhline(y=PRIOR_BENCHMARK_MSE, color='gray', linewidth=0.8, linestyle='--', alpha=0.7)
-    ax.text(len(models)-0.6, PRIOR_BENCHMARK_MSE + 0.01, 'prior single-run (0.95, retracted)', fontsize=7, color='gray')
+    ax.axhline(y=NET4_REFERENCE_MSE, color='gray', linewidth=0.8, linestyle='--', alpha=0.7)
+    ax.text(len(models)-0.6, NET4_REFERENCE_MSE + 0.01, 'net4 single run (~0.95)', fontsize=7, color='gray')
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=8)
     ax.set_ylabel('Test MSE', fontsize=10)

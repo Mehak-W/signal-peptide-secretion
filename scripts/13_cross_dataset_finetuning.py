@@ -9,15 +9,15 @@ dataset using 5-fold cross-validation.
 Strategy:
   1. Pretrain 5-seed vector NN ensemble on full Grasso training data (ESM2-650M;
      the external datasets only ship ESM2-650M embeddings, so the frozen feature
-     space must match — Ginkgo-AA0 embeddings are not available for these sets).
+     space must match; Ginkgo-AA0 embeddings are not available for these sets).
   2. For each external dataset:
      a. 5-fold CV (stratified for binary Wu dataset)
-     b. Per fold: an inner validation split drives early stopping (we never
+     b. Per fold: an inner validation split drives early stopping (I never
         restore weights on training loss); freeze the first two hidden blocks
         and fine-tune the last block + a fresh output head.
      c. For Wu (binary): sigmoid(1) head + BCE; continuous: linear(1) head + MSE.
   3. Aggregate by pooling the out-of-fold predictions into ONE vector and
-     computing a single Spearman with a bootstrap 95% CI — the SAME estimator
+     computing a single Spearman with a bootstrap 95% CI, the SAME estimator
      used for the zero-shot baseline (a mean of per-fold correlations is biased
      and high-variance on n~16-64 folds, and is not comparable to a full-N
      zero-shot rho).
@@ -167,7 +167,7 @@ def _build_ft_model(pretrained_model, output_activation, output_units, loss_fn,
         layers[7]: Dense(128)   layers[8]: LeakyReLU  layers[9]: Dropout  (block 3)
         layers[10]: Dense(10, softmax)
 
-    We freeze blocks 1-2 (layers 1-6) and keep block 3 + new output trainable.
+    I freeze blocks 1-2 (layers 1-6) and keep block 3 + new output trainable.
     """
     tf.random.set_seed(seed)
     np.random.seed(seed)
@@ -290,7 +290,7 @@ def evaluate_fold(y_true, y_pred, is_binary):
 def spearman_with_ci(y_true, y_pred, is_binary=False, n_boot=5000, seed=42):
     """Spearman rho on the pooled predictions with a bootstrap 95% CI.
 
-    This is the honest aggregate estimator: ONE correlation over all N points,
+    This is the pooled aggregate estimator: ONE correlation over all N points,
     so zero-shot and fine-tuned (out-of-fold) predictions are compared on the
     same footing. For tiny folds, a mean of per-fold correlations is biased and
     high-variance; pooling fixes both.
@@ -322,7 +322,7 @@ def spearman_with_ci(y_true, y_pred, is_binary=False, n_boot=5000, seed=42):
 
 def _inner_split(train_idx, y_ext, is_binary, fold_i, val_frac=0.15, min_val=6):
     """Carve a small inner validation set from a fold's training indices for
-    honest early stopping (so we never restore weights on training loss)."""
+    early stopping (so I never restore weights on training loss)."""
     n = len(train_idx)
     n_val = max(min_val, int(round(val_frac * n)))
     if n_val >= n - min_val:        # fold too small for an inner split
@@ -373,7 +373,7 @@ def run_finetuning_cv(pretrained_models, scaler_grasso, dataset_name, spec):
     fold_results = []
 
     for fold_i, (train_idx, test_idx) in enumerate(splits):
-        # Inner validation split for honest early stopping (never restore on
+        # Inner validation split for early stopping (never restore on
         # training loss). Scale with Grasso stats so the frozen pretrained
         # layers see the same input distribution as during pretraining.
         inner_tr, inner_val = _inner_split(train_idx, y_ext, is_binary, fold_i)

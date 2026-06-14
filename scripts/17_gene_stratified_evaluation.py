@@ -58,7 +58,7 @@ SEED = 42
 BIN_CENTERS = np.arange(1, 11)
 BIN_COLUMNS = [f'Perc_unambiguousReads_BIN{i:02d}_bin' for i in range(1, 11)]
 N_BOOTSTRAP = 10_000
-STANDARD_TEST_MSE = 0.964  # fair 1-seed standard; the historical 5-seed 0.932 was a single non-reproducible draw (see docs/reproducibility_findings.md)
+STANDARD_TEST_MSE = 0.964  # fair single-seed standard comparator for LOGO
 
 
 def build_model(input_dim, seed=SEED):

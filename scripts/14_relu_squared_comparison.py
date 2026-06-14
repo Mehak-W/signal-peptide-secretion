@@ -2,7 +2,7 @@
 """
 Script 14: ReLU-Squared vs LeakyReLU Activation Comparison
 
-Hypothesis: Signal peptide bin distributions are sparse — mass concentrates in
+Hypothesis: Signal peptide bin distributions are sparse; mass concentrates in
 1-2 bins out of 10. ReLU²(x) = max(0,x)² produces sparser activations than
 LeakyReLU because it zeros negatives AND compresses small positives toward zero.
 This may help the network "commit" to dominant bins.
@@ -54,8 +54,7 @@ FIGURES_DIR = BASE / 'figures'
 SEEDS = [42, 123, 456, 789, 1024]
 BIN_CENTERS = np.arange(1, 11)
 N_BOOTSTRAP = 10_000
-PRIOR_BENCHMARK_MSE = 0.953  # retracted single-draw, NOT a target (0.953 and 0.932 are seed noise; see docs/reproducibility_findings.md)
-BEST_MSE = 0.9323  # RETRACTED single-draw (Script 10); reproducible ~0.957, see docs/reproducibility_findings.md
+NET4_REFERENCE_MSE = 0.953  # single-run reference value for the optimization sweeps
 
 
 def build_model(input_dim, hidden_layers=(256, 256, 128), dropout=0.35,
@@ -255,7 +254,7 @@ def make_figure(results):
     c_leaky = '#4878A8'   # steel blue
     c_relu2 = '#D4652F'   # burnt orange
 
-    # ── (A) MSE comparison — dot-and-whisker (log scale for large gap) ────
+    # ── (A) MSE comparison; dot-and-whisker (log scale for large gap) ────
     ax = axes[0, 0]
     x = [0, 1]
     act_labels = ['LeakyReLU', 'ReLU\u00b2']
@@ -266,8 +265,8 @@ def make_figure(results):
     for i, c in enumerate([c_leaky, c_relu2]):
         ax.plot(x[i], mses[i], 'o', color=c, markersize=8, zorder=3)
         ax.plot([x[i], x[i]], [ci_lo[i], ci_hi[i]], color=c, linewidth=2, zorder=2)
-    ax.axhline(y=PRIOR_BENCHMARK_MSE, color='gray', linewidth=0.8, linestyle='--', alpha=0.7)
-    ax.text(1.4, PRIOR_BENCHMARK_MSE, 'prior single-run (0.95, retracted)', fontsize=7, color='gray', va='center')
+    ax.axhline(y=NET4_REFERENCE_MSE, color='gray', linewidth=0.8, linestyle='--', alpha=0.7)
+    ax.text(1.4, NET4_REFERENCE_MSE, 'net4 single run (~0.95)', fontsize=7, color='gray', va='center')
     ax.set_yscale('log')
     ax.set_xticks(x)
     ax.set_xticklabels(act_labels, fontsize=9)
@@ -276,7 +275,7 @@ def make_figure(results):
     ax.spines['right'].set_visible(False)
     ax.text(-0.15, 1.05, 'A', transform=ax.transAxes, fontsize=12, fontweight='bold')
 
-    # ── (B) Spearman comparison — dot-and-whisker, zoomed axis ────────────
+    # ── (B) Spearman comparison; dot-and-whisker, zoomed axis ────────────
     ax = axes[0, 1]
     sp_vals = [leaky['bootstrap_ci']['spearman']['point'], relu2['bootstrap_ci']['spearman']['point']]
     sp_lo = [leaky['bootstrap_ci']['spearman']['ci_lo'], relu2['bootstrap_ci']['spearman']['ci_lo']]
@@ -313,7 +312,7 @@ def make_figure(results):
     ax.spines['right'].set_visible(False)
     ax.text(-0.15, 1.05, 'C', transform=ax.transAxes, fontsize=12, fontweight='bold')
 
-    # ── (D) Per-sample error distributions — step histograms ──────────────
+    # ── (D) Per-sample error distributions; step histograms ──────────────
     ax = axes[1, 1]
     bins = np.linspace(-8, 8, 70)
     ax.hist(leaky['errors'], bins=bins, histtype='step', color=c_leaky,

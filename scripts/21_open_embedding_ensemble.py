@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Script 21: Reproducible open-weight headline — open-PLM ensemble.
+"""Script 21: Reproducible open-weight headline; open-PLM ensemble.
 
 The best single embedding (Ginkgo-AA-0) is API-only, proprietary, and the API is
 discontinued, so it cannot anchor a reproducible result. This script establishes
@@ -12,7 +12,7 @@ the reproducible headline using OPEN-weight PLMs (regenerable by anyone):
 
 Result (results/eval_prott5.json): the ProtT5+ESM2-650M+ProtBERT ensemble reaches
 ~0.98, recovering the discontinued AA-0 (~0.96) to within ~0.02 and improving ~20%
-over the Grasso RF baseline (1.22) — fully reproducibly.
+over the Grasso RF baseline (1.22); fully reproducibly.
 
 Run with --recompute to retrain (needs TF GPU + the generated parquets); by default
 it just (re)builds the figure from the cached results JSON.
