@@ -49,7 +49,7 @@ FIGURES_DIR = BASE / 'figures'
 SEEDS = [42, 123, 456, 789, 1024]
 BIN_CENTERS = np.arange(1, 11)
 N_BOOTSTRAP = 10_000
-BEST_NN_MSE = 0.932  # From Script 10 (5-seed ensemble, full data)
+BEST_NN_MSE = 0.957  # reproducible 5-seed value, full data (Section 3.4)
 NET4_REFERENCE_MSE = 0.953  # single-run reference value for the optimization sweeps
 
 
