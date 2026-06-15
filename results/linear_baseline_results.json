@@ -82,7 +82,7 @@
   "best_nn": {
     "bootstrap_ci": {
       "mse": {
-        "point": 0.9441922744088218,
+        "point": 0.957,
         "ci_lo": 0.8318219186121216,
         "ci_hi": 1.0663657748362236
       },
@@ -104,12 +104,14 @@
       1.0090525866738413,
       0.9824291049165468
     ],
-    "description": "(256,256,128) dropout=0.35, focal, 5-seed"
+    "description": "(256,256,128) dropout=0.35, focal, 5-seed",
+    "single_draw_mse": 0.9441922744088218,
+    "note": "Point estimate is the reproducible 5-seed mean (0.957 +/- 0.009, Section 3.4); CI/R2/Spearman are from a single draw (complementary single-initialization bound), per the paper-wide convention."
   },
   "embedding_contribution": {
     "baseline_mse": 4.762280100922355,
-    "embedding_pct": 97.52909843667253,
-    "mlp_pct": 2.470901563327473
+    "embedding_pct": 97.85735966759455,
+    "mlp_pct": 2.142640332405449
   },
   "elapsed_minutes": 35.464234646161394
 }

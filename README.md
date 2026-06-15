@@ -33,7 +33,7 @@ The open ensemble (**0.981**) closes the gap to the now-unavailable AA-0 (0.959)
 and improves ~20% over Grasso's 1.22, and **anyone can regenerate every embedding from
 HuggingFace, no API key, no defunct service.** The ensemble works because ProtT5 is strong
 enough (1.017) that the three open models are quality-comparable, so averaging their
-decorrelated errors yields a real gain; earlier ensembling *failed* when one embedding (AA-0)
+decorrelated errors yields a genuine improvement; earlier ensembling *failed* when one embedding (AA-0)
 so dominated the others that averaging only diluted it.
 
 ## Generalization: leave-one-gene-out
