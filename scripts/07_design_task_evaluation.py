@@ -15,7 +15,7 @@ Models evaluated per feature type:
 
 Design variants:
   - From xlsx Library_w_Bins_and_WA sheet (Set == NaN, WA not NaN)
-  - 5,229 variants across 135 genes
+  - 4,832 variants across 131 genes (>=5 variants/gene)
   - Train/test sequences explicitly excluded (no leakage)
 """
 import sys

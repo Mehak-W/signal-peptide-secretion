@@ -13,7 +13,7 @@ from sklearn.preprocessing import StandardScaler
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.models import FocalLoss
 BIN = [f'Perc_unambiguousReads_BIN{i:02d}_bin' for i in range(1, 11)]; C = np.arange(1, 11)
-SEEDS = [42, 123, 456, 789, 1024]; R = 2
+SEEDS = [42, 123, 456, 789, 1024]; R = 5
 DATA = Path(__file__).resolve().parent.parent / 'data'
 OUT = Path(__file__).resolve().parent.parent / 'results' / 'eval_prott5.json'
 def log(m): print(m, flush=True)

@@ -1,0 +1,8 @@
+{
+  "description": "Linear probe (Input->softmax(10), focal, 5-seed ensemble) WA predictions on the shared test set; correlation between the AA-0 and ESM2-650M prediction vectors.",
+  "n_test": 1326,
+  "pearson_aa0_vs_esm2": 0.9531046047238868,
+  "spearman_aa0_vs_esm2": 0.9515011615574427,
+  "spearman_aa0_vs_truth": 0.8653387196285113,
+  "spearman_esm2_vs_truth": 0.8541592043321038
+}

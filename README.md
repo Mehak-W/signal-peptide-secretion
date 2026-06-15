@@ -5,7 +5,7 @@ in *Bacillus subtilis* from the [Grasso et al. 2023](https://doi.org/10.1021/acs
 library, comparing random forests and neural networks across physicochemical descriptors and
 several protein-language-model (PLM) embeddings. Predicting the full 10-bin probability
 distribution (softmax → WA) rather than a scalar, with multi-seed ensembling, gives a
-**reproducible test MSE of ≈ 0.98**, about a **20% improvement over the Grasso RF baseline
+**reproducible test MSE of ≈ 0.975**, about a **20% improvement over the Grasso RF baseline
 (1.22)** on the official test split.
 
 > Numbers are reported as mean ± std over retrains (this architecture is high-variance, ≈ ±0.05 per single model); see [`docs/reproducibility_findings.md`](docs/reproducibility_findings.md) for details.
@@ -20,20 +20,20 @@ performance with an ensemble of architecturally diverse open PLMs:
 
 | Model (vector NN, 5-seed, mean ± std over retrains) | Test MSE | Reproducible? |
 |---|---|---|
-| **ProtT5 + ESM2-650M + ProtBERT (open ensemble)** | **0.981 ± 0.005** | ✅ open weights |
-| ProtT5 + ProtBERT | 0.986 | ✅ |
-| ProtT5 + ESM2-650M | 0.995 | ✅ |
-| ProtT5 (alone) | 1.017 | ✅ |
-| ESM2-650M (alone) | 1.072 | ✅ |
-| ProtBERT (alone) | 1.084 | ✅ |
-| Ginkgo AA-0 (alone) | 0.959 ± 0.014 | ❌ API discontinued |
+| **ProtT5 + ESM2-650M + ProtBERT (open ensemble)** | **0.975 ± 0.003** | ✅ open weights |
+| ProtT5 + ProtBERT | 0.977 | ✅ |
+| ProtT5 + ESM2-650M | 0.994 | ✅ |
+| ProtT5 (alone) | 1.013 | ✅ |
+| ProtBERT (alone) | 1.068 | ✅ |
+| ESM2-650M (alone) | 1.070 | ✅ |
+| Ginkgo AA-0 (alone) | 0.965 ± 0.005 | ❌ API discontinued |
 | Grasso et al. RF (baseline) | 1.22 | — |
 
-The open ensemble (**0.981**) closes the gap to the now-unavailable AA-0 (0.959) to within ~0.02
+The open ensemble (**0.975**) closes the gap to the now-unavailable AA-0 (0.965) to within ~0.01
 and improves ~20% over Grasso's 1.22, and **anyone can regenerate every embedding from
 HuggingFace, no API key, no defunct service.** The ensemble works because ProtT5 is strong
-enough (1.017) that the three open models are quality-comparable, so averaging their
-decorrelated errors yields a genuine improvement; earlier ensembling *failed* when one embedding (AA-0)
+enough (1.013) that the three open models are quality-comparable, so averaging their
+partially independent errors yields a genuine improvement; earlier ensembling *failed* when one embedding (AA-0)
 so dominated the others that averaging only diluted it.
 
 ## Generalization: leave-one-gene-out
@@ -54,7 +54,7 @@ is hard to beat per embedding:
 | Ordinal Cramér/CDF-L2 loss | worse than focal |
 | Focal + λ·MSE(WA) hybrid | worse than focal |
 | Non-neural (HistGBM, SVR, Ridge, RF) | all worse than the NN |
-| ProtBERT as a single embedding | not better than ESM2 |
+| ProtBERT as a single embedding | comparable to ESM2 (statistically tied) |
 | PReLU activation (matching the reference) | **helped (~0.02); adopted** |
 | **Open-model ensemble** (balanced components) | **helped; the headline above** |
 
@@ -76,6 +76,7 @@ is hard to beat per embedding:
 | 13 | Cross-dataset fine-tuning | Pooled out-of-fold Spearman + bootstrap CI |
 | 14–20 | Controls | ReLU², output formulation, unified schema, leave-one-gene-out, linear baselines, ablation, ESM2 optimization |
 | 21 | Open-embedding ensemble | ProtT5 / ProtBERT generation (`gen_open_embeddings.py`) + the reproducible headline ensemble |
+| 22–23 | Controls (cont.) | RF leave-one-gene-out companion; AA-0/ESM2 linear-probe agreement (`embedding_agreement.json`) |
 | — | `design_parity_fig4e.py` | Design-task ±1-WA fraction + parity plot vs Grasso Fig 4e |
 
 (Reproducibility/diagnostic experiments (seed-distribution measurement, the Wolfram
@@ -87,7 +88,7 @@ cross-check, and the improvement search) are documented in
 - **Ginkgo AA-0 is discontinued and unreproducible.** Its weights were never released (API-only,
   proprietary); the model API and registration portal are gone. I report AA-0 (~0.96) only as a
   caveated comparison and base all reproducible results on open weights. A linear
-  probe confirms AA-0 and ESM2-650M capture essentially the same signal (Pearson r = 0.975).
+  probe confirms AA-0 and ESM2-650M capture essentially the same signal (Pearson r = 0.953).
 - **This architecture is high-variance**, so every headline is reported as mean ± std over
   retrains rather than a single run. Re-training the (256,256,128)/dropout-0.35 config gives
   0.957 ± 0.009; the Wolfram net4 prototype behaves the same, with single runs spanning

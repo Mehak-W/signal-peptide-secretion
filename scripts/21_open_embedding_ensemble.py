@@ -43,7 +43,7 @@ LABELS = {
 
 def make_figure(d):
     apply_tufte()
-    order = ['ginkgo-AA0-650M', 'protbert', 'esm2-650M', 'prott5',
+    order = ['ginkgo-AA0-650M', 'esm2-650M', 'protbert', 'prott5',
              'prott5+esm2', 'prott5+protbert', 'prott5+esm2+protbert']
     order = [k for k in order if k in d]
     means = [d[k]['mean'] for k in order]
