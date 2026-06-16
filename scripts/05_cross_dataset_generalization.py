@@ -41,6 +41,7 @@ from src.evaluation import compute_metrics, format_metrics
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from src.plotstyle import apply_tufte, tufte_ax, GRAY, LIGHT_GRAY
 
 # ── Configuration ──────────────────────────────────────────────────────────
 RANDOM_STATE = 42
@@ -346,6 +347,7 @@ def main():
 
 def _make_figure(all_external_results, results, zhang_merged):
     """Generate cross-dataset generalization figure."""
+    apply_tufte()
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
     # ── Panel A: Spearman correlations by dataset ────────────────────────
@@ -357,15 +359,16 @@ def _make_figure(all_external_results, results, zhang_merged):
     x = np.arange(len(datasets))
     width = 0.35
 
-    bars_rf = ax.bar(x - width/2, rf_spearman, width, label='RF', color='steelblue', alpha=0.85)
-    bars_nn = ax.bar(x + width/2, nn_spearman, width, label='NN', color='darkorange', alpha=0.85)
+    ax.bar(x - width/2, rf_spearman, width, label='RF', color=GRAY)
+    ax.bar(x + width/2, nn_spearman, width, label='NN', color=LIGHT_GRAY)
 
     ax.set_ylabel('Spearman Rank Correlation\n(aligned: positive = agreement)')
     ax.set_xticks(x)
     ax.set_xticklabels(datasets, rotation=15, ha='right')
     ax.legend()
     ax.set_ylim(-0.5, 0.5)
-    ax.axhline(y=0, color='gray', linewidth=0.8, linestyle='--')
+    ax.axhline(y=0, color=LIGHT_GRAY, linewidth=0.8, linestyle='--')
+    tufte_ax(ax)
 
     # ── Panel B: Zhang cross-promoter scatter (sequence-matched) ─────────
     ax = axes[1]
@@ -382,17 +385,18 @@ def _make_figure(all_external_results, results, zhang_merged):
     # (positive/diagonal = agreement), consistent with the aligned bars in panel A.
     pred_rf_ranks = rankdata(-zhang_merged['pred_rf_p43'].values)
 
-    ax.scatter(p43_wa_ranks, pglvm_wa_ranks, alpha=0.5, s=30, color='steelblue',
+    ax.scatter(p43_wa_ranks, pglvm_wa_ranks, s=28, color=GRAY, alpha=0.7,
                label='Actual WA: P43 vs PglVM')
-    ax.scatter(p43_wa_ranks, pred_rf_ranks, alpha=0.5, s=30, color='darkorange', marker='^',
+    ax.scatter(p43_wa_ranks, pred_rf_ranks, s=28, facecolors='none', edgecolors=GRAY,
+               marker='^', linewidths=0.7, alpha=0.7,
                label='RF predicted secretion propensity ($-$WA) vs P43 actual')
 
     lims = [0, len(p43_wa) + 1]
-    ax.plot(lims, lims, 'k--', lw=0.8, alpha=0.5)
+    ax.plot(lims, lims, ls='--', lw=0.8, color=LIGHT_GRAY)
     ax.set_xlabel('Zhang-P43 Actual WA Rank')
     ax.set_ylabel('Rank')
-    ax.text(0.05, 0.95, '(B)', transform=ax.transAxes, fontsize=10, va='top')
     ax.legend(fontsize=8, loc='upper left')
+    tufte_ax(ax)
 
     plt.tight_layout()
 

@@ -54,6 +54,7 @@ from tensorflow.keras import layers
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from src.plotstyle import apply_tufte, tufte_ax, GRAY, LIGHT_GRAY
 
 # ── Configuration ──────────────────────────────────────────────────────────
 RANDOM_STATE = 42
@@ -449,6 +450,7 @@ def run_finetuning_cv(pretrained_models, scaler_grasso, dataset_name, spec):
 
 def make_figure(all_results, save_path):
     """Generate comparison figure: zero-shot vs fine-tuned."""
+    apply_tufte()
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
     datasets = [r['dataset'] for r in all_results]
@@ -465,29 +467,29 @@ def make_figure(all_results, save_path):
     x = np.arange(len(datasets))
     width = 0.35
 
-    bars_zs = ax.bar(x - width/2, zs_spearman, width, yerr=zs_err, label='Zero-shot',
-                     color='steelblue', alpha=0.85, capsize=4, edgecolor='none')
-    bars_ft = ax.bar(x + width/2, ft_spearman, width, yerr=ft_err,
-                     label='Fine-tuned (pooled 5-fold OOF)', color='forestgreen',
-                     alpha=0.85, capsize=4, edgecolor='none')
+    ax.bar(x - width/2, zs_spearman, width, yerr=zs_err, label='Zero-shot',
+           color=GRAY, capsize=4, error_kw=dict(lw=0.8))
+    ax.bar(x + width/2, ft_spearman, width, yerr=ft_err,
+           label='Fine-tuned (pooled 5-fold OOF)', color=LIGHT_GRAY,
+           capsize=4, error_kw=dict(lw=0.8))
 
     ax.set_ylabel('Spearman ρ (95% bootstrap CI)')
     ax.set_xticks(x)
     ax.set_xticklabels(datasets, rotation=15, ha='right')
     ax.legend(fontsize=9)
-    ax.axhline(y=0, color='gray', linewidth=0.8, linestyle='--')
+    ax.axhline(y=0, color=LIGHT_GRAY, linewidth=0.8, linestyle='--')
+    tufte_ax(ax)
 
-    # Panel B: Improvement
+    # Panel B: Improvement (sign carried by bar direction, no color encoding)
     ax = axes[1]
     improvements = [f - z for f, z in zip(ft_spearman, zs_spearman)]
-    colors = ['forestgreen' if imp > 0 else 'firebrick' for imp in improvements]
-    bars = ax.bar(datasets, improvements, color=colors, alpha=0.85,
-                  edgecolor='none')
+    ax.bar(datasets, improvements, color=GRAY)
 
-    ax.set_ylabel('Spearman ρ Improvement')
-    ax.axhline(y=0, color='gray', linewidth=0.8, linestyle='--')
+    ax.set_ylabel('Spearman ρ Improvement (fine-tuned − zero-shot)')
+    ax.axhline(y=0, color=LIGHT_GRAY, linewidth=0.8, linestyle='--')
 
     ax.set_xticklabels(datasets, rotation=15, ha='right')
+    tufte_ax(ax)
 
     plt.tight_layout()
     fig.savefig(save_path, dpi=300, bbox_inches='tight')
