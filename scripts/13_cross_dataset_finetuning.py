@@ -356,7 +356,12 @@ def run_finetuning_cv(pretrained_models, scaler_grasso, dataset_name, spec):
         wa_pred = probs @ BIN_CENTERS
         zs_preds.append(wa_pred)
     zs_pred_avg = np.mean(zs_preds, axis=0)
-    zs_metrics = evaluate_fold(y_ext, zs_pred_avg, is_binary)
+    # Sign-align: zero-shot predicts Grasso WA (low=good), but the external metrics
+    # are high=good, so correlate against the negated prediction (secretion score,
+    # high=good) -> positive = agreement. Fine-tuned heads are trained on the
+    # external metric directly, so their predictions need no alignment.
+    zs_score = -zs_pred_avg
+    zs_metrics = evaluate_fold(y_ext, zs_score, is_binary)
     print(f"  Zero-shot Spearman: {zs_metrics['spearman_rho']:+.4f} "
           f"(p={zs_metrics['spearman_p']:.2e})")
 
@@ -410,7 +415,7 @@ def run_finetuning_cv(pretrained_models, scaler_grasso, dataset_name, spec):
     # ── Primary aggregate: ONE Spearman over the pooled OOF predictions ──
     # (same estimator used for zero-shot, so the comparison is apples-to-apples)
     ft_pooled = spearman_with_ci(y_ext, oof_pred, is_binary=is_binary)
-    zs_pooled = spearman_with_ci(y_ext, zs_pred_avg, is_binary=is_binary)
+    zs_pooled = spearman_with_ci(y_ext, zs_score, is_binary=is_binary)
 
     # Per-fold mean kept only for reference (biased on tiny folds, not headline)
     agg = {}

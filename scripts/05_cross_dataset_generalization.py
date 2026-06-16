@@ -108,24 +108,33 @@ def load_external_dataset(filename):
 
 
 def evaluate_on_external(y_true, y_pred, is_binary=False):
-    """Compute generalization metrics (scale-invariant)."""
+    """Compute generalization metrics, sign-aligned so positive = agreement.
+
+    The external assays score higher = better secretion, while the model predicts
+    Grasso WA where LOWER = better secretion (bin 1 = best secretor). I therefore
+    correlate each external metric against the negated prediction (a secretion-
+    propensity score, higher = better), so a positive Spearman/Pearson (and
+    AUC > 0.5) means the model ranks external secretors in the biologically
+    correct direction. Only the sign is oriented; |rho| is unchanged.
+    """
     result = {}
+    score = -np.asarray(y_pred)   # align orientation with the external metrics
 
     # Spearman rank correlation (primary metric; scale-invariant)
-    sp_rho, sp_p = stats.spearmanr(y_true, y_pred)
+    sp_rho, sp_p = stats.spearmanr(y_true, score)
     result['spearman_rho'] = float(sp_rho)
     result['spearman_p'] = float(sp_p)
 
     # Pearson correlation
-    pe_r, pe_p = stats.pearsonr(y_true, y_pred)
+    pe_r, pe_p = stats.pearsonr(y_true, score)
     result['pearson_r'] = float(pe_r)
     result['pearson_p'] = float(pe_p)
 
     result['n_samples'] = len(y_true)
 
-    # For binary datasets, also compute AUC-ROC
+    # For binary datasets, also compute AUC-ROC (functional = positive class)
     if is_binary:
-        auc = roc_auc_score(y_true, y_pred)
+        auc = roc_auc_score(y_true, score)
         result['auc_roc'] = float(auc)
 
     return result
@@ -351,7 +360,7 @@ def _make_figure(all_external_results, results, zhang_merged):
     bars_rf = ax.bar(x - width/2, rf_spearman, width, label='RF', color='steelblue', alpha=0.85)
     bars_nn = ax.bar(x + width/2, nn_spearman, width, label='NN', color='darkorange', alpha=0.85)
 
-    ax.set_ylabel('Spearman Rank Correlation')
+    ax.set_ylabel('Spearman Rank Correlation\n(aligned: positive = agreement)')
     ax.set_xticks(x)
     ax.set_xticklabels(datasets, rotation=15, ha='right')
     ax.legend()
@@ -368,12 +377,15 @@ def _make_figure(all_external_results, results, zhang_merged):
 
     p43_wa_ranks = rankdata(p43_wa)
     pglvm_wa_ranks = rankdata(pglvm_wa)
-    pred_rf_ranks = rankdata(zhang_merged['pred_rf_p43'].values)
+    # Align orientation: predicted WA is low=good while external WA is high=good, so
+    # rank the secretion propensity (-WA) to match the actual-WA ranking
+    # (positive/diagonal = agreement), consistent with the aligned bars in panel A.
+    pred_rf_ranks = rankdata(-zhang_merged['pred_rf_p43'].values)
 
     ax.scatter(p43_wa_ranks, pglvm_wa_ranks, alpha=0.5, s=30, color='steelblue',
                label='Actual WA: P43 vs PglVM')
     ax.scatter(p43_wa_ranks, pred_rf_ranks, alpha=0.5, s=30, color='darkorange', marker='^',
-               label=f'RF predicted vs P43 actual')
+               label='RF predicted secretion propensity ($-$WA) vs P43 actual')
 
     lims = [0, len(p43_wa) + 1]
     ax.plot(lims, lims, 'k--', lw=0.8, alpha=0.5)

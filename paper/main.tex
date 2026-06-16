@@ -37,7 +37,7 @@ Two findings temper these results.
 A linear probe on the same embeddings captures most of the predictive gain over a mean baseline, indicating that the PLM embedding carries most of the task-relevant signal, with the neural network head adding a smaller further improvement.
 Leave-one-gene-out cross-validation reveals MSE 2.19 (Spearman $\rho = 0.72$), a sharp increase over the standard split (in which 132 of 134 genes overlap train and test), and is reported as the realistic cross-gene generalization estimate.
 
-Cross-dataset evaluation on four external datasets shows that predictions do not transfer across organisms; fine-tuning significantly reverses the correlation for the one binary dataset (Wu) but significantly worsens the three continuous ones, so secretion-efficiency magnitude does not transfer.
+Cross-dataset evaluation on four external datasets shows weak but consistent zero-shot transfer in the biologically correct direction (agreement-aligned Spearman ${\sim}0.2$--$0.3$; the Wu and Xue random-forest results survive multiple-testing correction); fine-tuning a target-supervised head on frozen features does not help and, for the three continuous datasets, overfits and degrades the transfer, so absolute secretion-efficiency magnitude does not transfer.
 Applied to 4832 designed variants across 131 genes, the models achieve Spearman $\rho = 0.36$--0.39 and classification accuracy of 72--74\%, useful for prioritizing candidates in experimental screening.
 \end{abstract}
 
@@ -197,11 +197,11 @@ To evaluate this, I test the best ESM2-650M RF and the 5-seed NN ensemble on fou
     \item \textbf{Xue} \citep{xue2023}: 322 signal peptides in \textit{S.\ cerevisiae} with enzyme activity measurements.
     \item \textbf{Zhang-P43 / Zhang-PglVM} \citep{zhang2016}: 114 signal peptides in \textit{B.\ subtilis} measured under two different promoters.
 \end{itemize}
-Spearman rank correlation serves as the primary metric, as it is invariant to differences in scale and units between datasets.
+Spearman rank correlation serves as the primary metric, as it is invariant to differences in scale and units between datasets. Spearman is invariant to scale but not to \emph{direction}: the external assays score higher values as better secretion, whereas the model predicts Grasso WA where lower is better (bin~1 = best secretor). I therefore orient every cross-dataset correlation so that a positive value indicates agreement (equivalently, I correlate each external metric against the negated predicted WA); rank-correlation magnitudes are unchanged, only the sign. External-metric orientations were confirmed from the data: Xue (enzyme activity, 0--10437) and Zhang (secretion screening, 0--193 / 0--327) are raw magnitudes with higher = better, and Wu uses the standard functional${=}1$ binary encoding.
 For the Zhang datasets, the same 114 signal peptides are measured under two promoters (P43 and PglVM), which lets me check how well rankings are conserved across promoters.
 
 \paragraph{Transfer learning via fine-tuning.}
-To test whether the negative zero-shot correlations can be reversed with limited target-domain data,
+To test whether limited target-domain data strengthens the weak zero-shot transfer,
 I fine-tune a vector regression ensemble with the same validation-selected architecture
 (focal loss, (256, 256, 128), validation-selected dropout) trained on ESM2-650M embeddings,
 which are open-weight and reproducible for external sequences (Ginkgo AA-0 embeddings cannot be generated for external sequences).
@@ -555,34 +555,34 @@ Table~\ref{tab:cross} summarizes cross-dataset performance for the best ESM2-650
 
 \begin{table}[H]
 \centering
-\caption{Cross-dataset generalization. Models trained on Grasso data are evaluated on four external datasets. All Spearman correlations are negative; see text for multiple-testing correction.}
+\caption{Cross-dataset generalization. Models trained on Grasso data are evaluated on four external datasets. Spearman correlations are sign-aligned so that positive indicates agreement (external assays score higher = better secretion, whereas predicted Grasso WA is lower = better; Section~\ref{sec:cross_dataset_methods}). All are positive; see text for multiple-testing correction.}
 \label{tab:cross}
 \begin{tabular}{lrcrcr}
 \toprule
 Dataset & $N$ & \multicolumn{2}{c}{RF Spearman ($p$)} & \multicolumn{2}{c}{NN Spearman ($p$)} \\
 \midrule
-Wu & 81 & $-$0.314 & (0.004) & $-$0.288 & (0.009) \\
-Xue & 322 & $-$0.278 & ($<$0.001) & $-$0.127 & (0.023) \\
-Zhang-P43 & 114 & $-$0.218 & (0.020) & $-$0.196 & (0.037) \\
-Zhang-PglVM & 114 & $-$0.250 & (0.007) & $-$0.213 & (0.023) \\
+Wu & 81 & $+$0.314 & (0.004) & $+$0.279 & (0.012) \\
+Xue & 322 & $+$0.278 & ($<$0.001) & $+$0.138 & (0.013) \\
+Zhang-P43 & 114 & $+$0.218 & (0.020) & $+$0.191 & (0.042) \\
+Zhang-PglVM & 114 & $+$0.250 & (0.007) & $+$0.211 & (0.024) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-All four external datasets yield negative Spearman correlations for both RF and NN models, individually significant but mostly not after multiple-testing correction.
+All four external datasets yield small but consistently \emph{positive} agreement-aligned correlations for both RF and NN, indicating that the secretion-quality ranking transfers weakly but in the biologically correct direction. The correlations are individually significant ($p < 0.05$); under Bonferroni correction across the eight zero-shot tests ($\alpha = 0.00625$), the Wu and Xue random-forest results survive, while the remaining (Zhang and NN) rows are directionally consistent but not individually significant after correction. The transfer is weak (${\sim}0.2$--$0.3$, a few percent of rank variance) and absolute magnitude does not transfer.
 For the Zhang datasets, the measured WA values correlate at $r = 0.977$ across the two promoters (P43 and PglVM), indicating that signal peptide rankings are largely conserved within a host.
 Figure~\ref{fig:cross} visualizes the cross-dataset evaluation.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.62\textwidth]{../figures/cross_dataset_generalization.png}
-    \caption{Cross-dataset generalization results. Zero-shot Spearman correlations between predicted and observed signal peptide efficiency across four external datasets, for the random forest (RF) and neural network (NN). All correlations are negative; per-dataset $p$-values are given in Table~\ref{tab:cross}.}
+    \caption{Cross-dataset generalization results. Zero-shot Spearman correlations between predicted and observed signal peptide efficiency across four external datasets, for the random forest (RF) and neural network (NN), sign-aligned so positive indicates agreement (Section~\ref{sec:cross_dataset_methods}). All correlations are positive (weak transfer in the biologically correct direction); per-dataset $p$-values are given in Table~\ref{tab:cross}.}
     \label{fig:cross}
 \end{figure}
 
 \paragraph{Fine-tuning results.}
-Given the uniformly negative zero-shot correlations, I next test whether fine-tuning
-the pretrained vector ensemble can recover positive transfer.
+Given the weak but consistently positive zero-shot transfer, I next test whether fine-tuning
+the pretrained vector ensemble on target-domain data improves it.
 Table~\ref{tab:finetune} compares zero-shot and fine-tuned performance of the ESM2-650M
 vector regression ensemble on each external dataset; the zero-shot values differ from
 Table~\ref{tab:cross} because they come from the vector ensemble rather than the scalar RF/NN models.
@@ -591,42 +591,33 @@ Table~\ref{tab:cross} because they come from the vector ensemble rather than the
 \centering
 \caption{Cross-dataset fine-tuning results. The pretrained vector regression ensemble is
 fine-tuned on each external dataset using 5-fold CV $\times$ 5 seeds. Zero-shot uses the
-vector model directly; fine-tuned replaces and retrains the output head. Both correlations
+vector model directly; fine-tuned replaces and retrains the output head on the external metric. Zero-shot correlations are sign-aligned (positive $=$ agreement, as in Table~\ref{tab:cross}); the fine-tuned head is trained on that metric directly, so a negative value indicates genuine anti-correlation rather than a convention flip. Both correlations
 are computed as a single \emph{pooled out-of-fold} Spearman $\rho$ over all held-out
 predictions, with a 5000-resample bootstrap 95\% CI; significance is judged by whether the
 CI excludes zero. (A mean of per-fold correlations is upward-biased in magnitude and would obscure the Wu effect, so the pooled estimator is used.)}
 \label{tab:finetune}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lrcc}
 \toprule
-Dataset & $N$ & Zero-Shot $\rho$ & Fine-Tuned $\rho$ [95\% CI] \\
+Dataset & $N$ & Zero-Shot $\rho$ [95\% CI] & Fine-Tuned $\rho$ [95\% CI] \\
 \midrule
-Wu (binary) & 81 & $-$0.227 & $+$0.341 [$+$0.131, $+$0.536] \\
-Xue & 322 & $-$0.104 & $-$0.192 [$-$0.296, $-$0.086] \\
-Zhang-P43 & 114 & $-$0.194 & $-$0.316 [$-$0.479, $-$0.133] \\
-Zhang-PglVM & 114 & $-$0.269 & $-$0.231 [$-$0.398, $-$0.051] \\
+Wu (binary) & 81 & $+$0.246 [$+$0.034, $+$0.455] & $+$0.320 [$+$0.101, $+$0.516] \\
+Xue & 322 & $+$0.161 [$+$0.053, $+$0.264] & $-$0.196 [$-$0.300, $-$0.091] \\
+Zhang-P43 & 114 & $+$0.220 [$+$0.040, $+$0.377] & $-$0.307 [$-$0.468, $-$0.129] \\
+Zhang-PglVM & 114 & $+$0.188 [$+$0.014, $+$0.346] & $-$0.355 [$-$0.504, $-$0.187] \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
-On the pooled out-of-fold estimate, fine-tuning \emph{significantly} reverses the negative
-zero-shot correlation for the binary Wu dataset, shifting Spearman $\rho$ from $-$0.227 to
-$+$0.341 with a 95\% CI of [$+$0.131, $+$0.536] that excludes zero. For the three continuous
-datasets, fine-tuning instead \emph{significantly worsens} the (already negative) correlations:
-Xue $-$0.104 $\to$ $-$0.192, Zhang-P43 $-$0.194 $\to$ $-$0.316, Zhang-PglVM $-$0.269 $\to$ $-$0.231,
-all with CIs excluding zero on the negative side.
-The deterioration likely reflects overfitting of the fine-tuned output head to spurious
-correlations in the small training folds (64--258 samples per fold),
-compounded by the fundamental biological differences between the Grasso and external experimental systems.
-So fine-tuning helps only the binary task and hurts the continuous ones; PLM representations
-do not transfer secretion-efficiency \emph{magnitude} across these systems.
+On the aligned pooled out-of-fold estimate, the zero-shot transfer is weakly positive and significant for all four datasets (Spearman $\rho$ from $+$0.16 to $+$0.25, each 95\% CI excluding zero, marginally so for Zhang-PglVM). Fine-tuning retrains the output head on the target metric over frozen Grasso features, so the fine-tuned column reflects a target-supervised head on those features rather than pure transfer. For the binary Wu dataset, a Wu-supervised sigmoid head reaches $+$0.320 [$+$0.101, $+$0.516], comparable to the $+$0.246 zero-shot value; the two CIs overlap, so the change is not significant. For the three continuous datasets, the fine-tuned linear head \emph{significantly degrades} the result, driving the correlation from significantly positive to significantly negative with the zero-shot and fine-tuned CIs separated in every case (Xue $+$0.161 $\to$ $-$0.196, Zhang-P43 $+$0.220 $\to$ $-$0.307, Zhang-PglVM $+$0.188 $\to$ $-$0.355).
+Limited target-domain data thus does not merely fail to help; it destroys the weak working transfer present zero-shot, consistent with the head overfitting spurious correlations in the small folds (64--258 samples per fold).
+In short, the rank ordering transfers weakly zero-shot, and a target-supervised head on frozen features does not improve it and, for the continuous assays, harms it.
 Figure~\ref{fig:finetune} visualizes the zero-shot versus fine-tuned performance.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.62\textwidth]{../figures/cross_dataset_finetuning.png}
-    \caption{Cross-dataset fine-tuning results. Zero-shot vs.\ fine-tuned pooled out-of-fold
-    Spearman correlations for the vector regression ensemble on four external datasets. Error
-    bars are 95\% bootstrap confidence intervals on the pooled estimate.}
+    \caption{Cross-dataset fine-tuning results (sign-aligned so positive $=$ agreement). Left: zero-shot vs.\ fine-tuned pooled out-of-fold Spearman correlations for the vector regression ensemble on four external datasets; error bars are 95\% bootstrap confidence intervals. Right: the change from fine-tuning (fine-tuned minus zero-shot), which is positive but non-significant for the binary Wu task and significantly negative for the three continuous datasets.}
     \label{fig:finetune}
 \end{figure}
 
@@ -722,19 +713,12 @@ The reproducible contribution is methodological as much as numerical: ensembling
 The per-seed variance and a cross-check against the Wolfram \texttt{net4} prototype are detailed in the repository's reproducibility notes (\path|docs/reproducibility_findings.md|).
 
 \paragraph{Cross-Dataset Generalization.}
-The cross-dataset results indicate that a signal peptide model trained in one system does not transfer to another.
-All four datasets show negative point estimates, but most are not individually significant after multiple-testing correction; the defensible reading is a failure to transfer rather than reliable anti-correlation.
-This likely reflects host- or cargo-specific signal patterns learned from the Grasso data that are maladaptive elsewhere, since signal peptide efficiency depends on the cargo protein, promoter, host organism, and growth conditions.
+Once the orientation conventions are aligned (Section~\ref{sec:cross_dataset_methods}), the cross-dataset results indicate \emph{weak but real} transfer rather than none: all four external datasets yield small positive agreement-aligned correlations (Spearman ${\sim}0.2$--$0.3$), and the consistency of the sign is the key evidence. A genuine failure to transfer would scatter the correlations around zero; instead all four sit systematically positive, while the within-Grasso predicted-versus-actual correlation is $+$0.87 on the same convention, the signature of a real if weak signal rather than noise. Two of the eight zero-shot tests (the Wu and Xue random forests) survive Bonferroni correction; the remaining rows are directionally consistent but underpowered. The transfer is nonetheless weak (a few percent of rank variance), and absolute magnitude does not transfer.
+This likely reflects host- and cargo-specific signal patterns learned from the Grasso data that only partially generalize, since signal peptide efficiency depends on the cargo protein, promoter, host organism, and growth conditions.
 A signal peptide optimized for $\alpha$-amylase secretion in \textit{B.\ subtilis} may be poorly suited for xylanase production in the same organism, let alone for enzyme secretion in \textit{E.\ coli} or \textit{S.\ cerevisiae}.
-The Zhang cross-promoter analysis provides complementary evidence: the same 114 signal peptides correlate at $r = 0.977$ across two promoters, confirming that signal peptide rankings are partially conserved within a system but not across systems.
-In practice, this means models for signal peptide optimization need to be trained on task-specific data rather than transferred across experimental contexts.
-Fine-tuning the pretrained vector ensemble on target-domain data helps only the binary task:
-freezing the learned feature layers and retraining only the output head \emph{significantly}
-reverses the negative correlation for Wu ($-$0.227 $\to$ $+$0.341, 95\% CI [$+$0.131, $+$0.536]),
-the sole binary-outcome dataset, but significantly \emph{worsens} the three continuous datasets
-(Xue: $-$0.104 $\to$ $-$0.192; Zhang-P43: $-$0.194 $\to$ $-$0.316; Zhang-PglVM: $-$0.269 $\to$ $-$0.231,
-all CIs excluding zero). Wu's binary labels are evidently easier to learn from limited data than
-continuous activity magnitudes, which do not transfer across these experimental systems.
+The Zhang cross-promoter analysis provides complementary evidence: the same 114 signal peptides correlate at $r = 0.977$ across two promoters, confirming that signal peptide rankings are largely conserved within a system, and only weakly across systems (Table~\ref{tab:cross}).
+In practice, the cross-system transfer is too weak to rely on, so models for signal peptide optimization still benefit from task-specific training data.
+Fine-tuning on target-domain data does not help: a target-supervised head on frozen Grasso features leaves the binary Wu task statistically unchanged ($+$0.246 $\to$ $+$0.320, overlapping CIs) and \emph{significantly degrades} the three continuous datasets, driving their weak positive transfer to negative with separated CIs (Xue $+$0.161 $\to$ $-$0.196; Zhang-P43 $+$0.220 $\to$ $-$0.307; Zhang-PglVM $+$0.188 $\to$ $-$0.355). Limited target data thus actively harms a working signal rather than improving it.
 These results underscore that transfer learning for signal peptide efficiency remains
 severely data-limited, and that fine-tuning on small datasets risks overfitting rather than recovering
 transferable patterns.
@@ -754,7 +738,6 @@ Appendix~\ref{app:dropout_val} shows that all dropout values $\geq 0.20$ produce
 The external fine-tuning datasets are small (81--322 sequences), so even the pooled out-of-fold correlations I report carry wide bootstrap intervals; the cross-dataset conclusions should be read as directional rather than precise.
 Validation MSE improves from 1.375 at dropout 0.15 to 1.333--1.347 for all dropout rates $\geq 0.20$, with no statistically significant differences among them (all within seed-to-seed variability of $\pm$0.07--0.09); the test-optimal dropout (0.35) produces a validation MSE of 1.347 $\pm$ 0.072, indistinguishable from the validation-optimal (0.20, MSE 1.333 $\pm$ 0.084).
 The differences between top-performing models are modest; 95\% bootstrap confidence intervals for all models are reported in Appendix~\ref{app:bootstrap}.
-The cross-dataset significance tests (Table~\ref{tab:cross}) involve eight comparisons; after Bonferroni correction ($\alpha = 0.00625$), all four NN correlations and two of the four RF correlations no longer reach significance. Only the Wu and Xue RF correlations survive correction.
 
 In terms of scope, the dataset is limited to \textit{B.\ subtilis} with a single reporter enzyme.
 Ginkgo AA-0 embeddings yield the best single-embedding result but are derived from a proprietary, now-discontinued model and are permanently unreproducible; the reproducible open-weight ensemble (ProtT5 + ESM2-650M + ProtBERT, $0.975 \pm 0.003$) recovers all but ${\sim}0.01$ of that performance, confirming that the central result is not contingent on proprietary representations.
@@ -772,7 +755,7 @@ A LOGO cross-validation (Section~\ref{sec:gene_stratified}) addresses this conce
 
 Across physicochemical descriptors and several PLM embeddings, a vector regression neural network with multi-seed ensembling substantially improves over the random forest baseline. The reproducible headline is an ensemble of architecturally diverse \emph{open-weight} PLMs (ProtT5, ESM2-650M, ProtBERT) at MSE $0.975 \pm 0.003$, a ${\sim}20\%$ improvement over the 1.22 baseline and regenerable by anyone from public weights; the discontinued proprietary Ginkgo AA-0 ($0.965 \pm 0.005$) is marginally stronger but reported only as a caveated comparison.
 
-Two results temper this. A linear probe on the embeddings captures most of the predictive gain, so the embedding carries most of the task-relevant signal; and LOGO cross-validation (MSE 2.19, Spearman 0.720) shows that the standard split substantially overstates cross-gene generalization, so gene-stratified evaluation should be the default. Across organisms the models do not transfer zero-shot and fine-tuning recovers only the binary task, but within the training domain they rank designed variants usefully (Spearman up to 0.390, 72--74\% classification accuracy).
+Two results temper this. A linear probe on the embeddings captures most of the predictive gain, so the embedding carries most of the task-relevant signal; and LOGO cross-validation (MSE 2.19, Spearman 0.720) shows that the standard split substantially overstates cross-gene generalization, so gene-stratified evaluation should be the default. Across organisms the models transfer only weakly zero-shot, in the biologically correct direction (agreement-aligned Spearman ${\sim}0.2$--$0.3$), and small-sample fine-tuning does not improve this, but within the training domain they rank designed variants usefully (Spearman up to 0.390, 72--74\% classification accuracy).
 
 Future work could explore end-to-end fine-tuning of PLM weights on secretion-efficiency data, region-aware embedding pooling, or extension to additional host organisms and cargo proteins.
 
